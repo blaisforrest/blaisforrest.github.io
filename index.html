@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <title>Forrest Blais | 3D Character Animator — AAA Games &amp; More</title>
+  <meta name="description" content="Forrest Blais is a 3D character animator based in Johnson City, TN with credits on Five Nights at Freddy's: Help Wanted 2, Secret of the Mimic, Mortal Kombat 1, Kitti Katz (Netflix), and Blind Fate: Edo no Yami.">
+  <meta name="keywords" content="3D character animator, game animation, Maya, MotionBuilder, Steel Wool Studios, Forrest Blais">
+  <link rel="canonical" href="https://forrestblais.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://forrestblais.com/">
+  <meta property="og:title"       content="Forrest Blais | 3D Character Animator">
+  <meta property="og:description" content="Professional 3D character animator — AAA games, VR, and beyond.">
+  <!-- TODO: Add og:image once profile/hero photo is ready -->
+  <!-- <meta property="og:image" content="https://forrestblais.com/images/og-card.jpg"> -->
+
+  <!-- Favicon placeholder — TODO: replace with real favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='16' fill='%2329a3a3'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-family='Arial' font-weight='700' font-size='14' fill='%230b111e'>FB</text></svg>">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ======================================================
+       HEADER
+       ====================================================== -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="index.html" class="site-logo" aria-label="Forrest Blais home">
+        <div class="logo-mark" aria-hidden="true">FB</div>
+        <div class="logo-text">
+          <div class="name">Forrest Blais</div>
+          <div class="role">Character Animator</div>
+        </div>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html" class="active">Demo Reel</a>
+        <a href="other-work.html">Other Work</a>
+        <a href="photography.html" class="nav-photo">📷 Photography</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile menu overlay -->
+  <div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button class="menu-close" aria-label="Close menu">&times;</button>
+    <a href="index.html">Demo Reel</a>
+    <a href="other-work.html">Other Work</a>
+    <a href="photography.html" class="nav-photo">📷 Photography</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- ======================================================
+       MAIN CONTENT
+       ====================================================== -->
+  <main id="main-content">
+
+    <!-- ---- HERO ---- -->
+    <section id="hero" aria-labelledby="hero-heading">
+      <div class="container">
+        <div class="hero-inner">
+
+          <!-- Avatar with rotating ring -->
+          <div class="avatar-wrapper" aria-hidden="true">
+            <div class="avatar-ring"></div>
+            <div class="avatar-img">
+              <!--
+                TODO: Save your profile photo as images/profile.jpg in the repo.
+                The circular crop and ring animation are handled by CSS.
+                (The photo you shared in chat was not a file attachment,
+                so it couldn't be saved automatically — just add it manually.)
+              -->
+              <img src="images/profile.jpg" alt="Forrest Blais, 3D Character Animator"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="avatar-placeholder" style="display:none;">FB</div>
+            </div>
+            <div class="avatar-badge">
+              <span class="dot"></span>
+              Available for Work
+            </div>
+          </div>
+
+          <!-- Text content -->
+          <div class="hero-text">
+            <p class="hero-label">✦ Animation Portfolio</p>
+
+            <h1 class="hero-name" id="hero-heading">
+              <span class="first">Forrest</span>
+              <span class="last"> Blais</span>
+            </h1>
+
+            <p class="hero-title">3D Character Animator</p>
+
+            <p class="hero-tagline">
+              Crafting expressive, performance-driven animation for AAA games,
+              VR experiences, and beyond.
+            </p>
+
+            <!-- Animated stats counter -->
+            <div class="hero-stats" aria-label="Career statistics">
+              <div class="stat">
+                <div class="stat-value">
+                  <!-- TODO: Confirm exact years of experience with Forrest -->
+                  <span data-count="10">0</span><span>+</span>
+                </div>
+                <p class="stat-label">Years</p>
+              </div>
+              <div class="stat">
+                <div class="stat-value">
+                  <span data-count="5">0</span><span>+</span>
+                </div>
+                <p class="stat-label">Productions</p>
+              </div>
+              <div class="stat">
+                <div class="stat-value">
+                  <span data-count="5">0</span>
+                </div>
+                <p class="stat-label">Credits</p>
+              </div>
+            </div>
+
+            <div class="hero-buttons">
+              <!--
+                TODO: Replace with a self-hosted PDF at /files/forrest-blais-resume.pdf
+                Current link points to original Wix-hosted PDF.
+              -->
+              <a href="https://7b3eb6e1-b1b8-4c0a-b108-3baa8b0c071d.filesusr.com/ugd/771299_9dc576f86ac642fcad7a041a29f9aed3.pdf"
+                 target="_blank" rel="noopener noreferrer"
+                 class="btn btn-primary">Resume ↗</a>
+              <a href="contact.html" class="btn btn-outline">Contact Me</a>
+              <a href="photography.html" class="btn btn-ghost">📷 Photography</a>
+            </div>
+          </div><!-- /.hero-text -->
+
+        </div><!-- /.hero-inner -->
+      </div><!-- /.container -->
+    </section><!-- /#hero -->
+
+    <!-- ---- PORTFOLIO / CAROUSEL ---- -->
+    <section id="portfolio" aria-labelledby="portfolio-heading">
+      <div class="container">
+        <p class="section-label">Portfolio</p>
+        <h2 class="section-title" id="portfolio-heading">Demo Reels</h2>
+        <div class="section-divider"></div>
+
+        <div class="carousel-wrapper" role="region" aria-label="Demo reel carousel">
+
+          <!-- Track -->
+          <div class="carousel-track-container">
+            <div class="carousel-track">
+
+              <!-- Slide 1: Demo Reel 2023 — vimeo.com/868567472 -->
+              <div class="carousel-slide" data-title="Demo Reel 2023">
+                <div class="carousel-video">
+                  <iframe src="https://player.vimeo.com/video/868567472?color=29a3a3&title=0&byline=0&portrait=0"
+                          allow="autoplay; fullscreen; picture-in-picture"
+                          allowfullscreen
+                          title="Forrest Blais — Demo Reel 2023"
+                          loading="lazy"></iframe>
+                </div>
+              </div>
+
+              <!-- Slide 2: FNaF HW2 — vimeo.com/909612505 -->
+              <div class="carousel-slide" data-title="Five Nights at Freddy's: Help Wanted 2 — Show Reel">
+                <div class="carousel-video">
+                  <iframe src="https://player.vimeo.com/video/909612505?color=29a3a3&title=0&byline=0&portrait=0"
+                          allow="autoplay; fullscreen; picture-in-picture"
+                          allowfullscreen
+                          title="FNaF: Help Wanted 2 — Show Reel"
+                          loading="lazy"></iframe>
+                </div>
+              </div>
+
+              <!-- Slide 3: Kitti Katz (Netflix) — vimeo.com/828600295 -->
+              <div class="carousel-slide" data-title="Kitti Katz (Netflix) — Demo Reel">
+                <div class="carousel-video">
+                  <iframe src="https://player.vimeo.com/video/828600295?color=29a3a3&title=0&byline=0&portrait=0"
+                          allow="autoplay; fullscreen; picture-in-picture"
+                          allowfullscreen
+                          title="Kitti Katz (Netflix) — Demo Reel"
+                          loading="lazy"></iframe>
+                </div>
+              </div>
+
+              <!-- Slide 4: Demo Reel 2022 — vimeo.com/242308539 -->
+              <div class="carousel-slide" data-title="Demo Reel 2022">
+                <div class="carousel-video">
+                  <iframe src="https://player.vimeo.com/video/242308539?color=29a3a3&title=0&byline=0&portrait=0"
+                          allow="autoplay; fullscreen; picture-in-picture"
+                          allowfullscreen
+                          title="Forrest Blais — Demo Reel 2022"
+                          loading="lazy"></iframe>
+                </div>
+              </div>
+
+              <!-- TODO: Add FNaF Secret of the Mimic reel once a Vimeo upload is ready -->
+
+            </div><!-- /.carousel-track -->
+
+            <!-- Caption -->
+            <div class="carousel-caption" aria-live="polite">
+              <span class="carousel-title">Demo Reel 2023</span>
+              <span class="carousel-counter">1 / 4</span>
+            </div>
+          </div><!-- /.carousel-track-container -->
+
+          <!-- Controls -->
+          <div class="carousel-controls">
+            <button class="carousel-btn carousel-btn-prev" aria-label="Previous slide">&#8249;</button>
+            <div class="carousel-dots" role="tablist" aria-label="Carousel slides">
+              <button class="carousel-dot active" role="tab" aria-label="Slide 1" aria-selected="true"></button>
+              <button class="carousel-dot" role="tab" aria-label="Slide 2"></button>
+              <button class="carousel-dot" role="tab" aria-label="Slide 3"></button>
+              <button class="carousel-dot" role="tab" aria-label="Slide 4"></button>
+            </div>
+            <button class="carousel-btn carousel-btn-next" aria-label="Next slide">&#8250;</button>
+          </div>
+
+        </div><!-- /.carousel-wrapper -->
+      </div><!-- /.container -->
+    </section>
+
+    <!-- ---- WORK CREDITS ---- -->
+    <section id="credits" aria-labelledby="credits-heading">
+      <div class="container">
+        <p class="section-label">Featured In</p>
+        <h2 class="section-title" id="credits-heading">Work Credits</h2>
+        <div class="section-divider"></div>
+
+        <div class="credits-grid">
+
+          <div class="credit-card">
+            <span class="credit-type">Game</span>
+            <h3>Mortal Kombat 1</h3>
+            <p class="credit-studio">NetherRealm Studios</p>
+            <p class="credit-desc">High-fidelity fighter animation for one of gaming's most iconic franchises.</p>
+          </div>
+
+          <div class="credit-card">
+            <span class="credit-type">Game</span>
+            <h3>Five Nights at Freddy's: Help Wanted 2</h3>
+            <p class="credit-studio">Steel Wool Studios</p>
+            <p class="credit-desc">Character and gameplay animation for the sequel to the smash-hit VR horror game.</p>
+          </div>
+
+          <div class="credit-card">
+            <span class="credit-type">Game</span>
+            <h3>Five Nights at Freddy's: Secret of the Mimic</h3>
+            <p class="credit-studio">Steel Wool Studios</p>
+            <p class="credit-desc">Character animation for this PSVR2 entry in the beloved horror franchise.</p>
+          </div>
+
+          <div class="credit-card">
+            <span class="credit-type">Game</span>
+            <h3>Blind Fate: Edo no Yami</h3>
+            <p class="credit-studio">Troglobytes Games</p>
+            <p class="credit-desc">Combat and traversal animation for this stylish action platformer set in a dystopian feudal Japan.</p>
+          </div>
+
+          <div class="credit-card">
+            <span class="credit-type">Film / TV</span>
+            <h3>Kitti Katz</h3>
+            <p class="credit-studio">Netflix</p>
+            <p class="credit-desc">Character animation for the Netflix original animated series.</p>
+          </div>
+
+        </div><!-- /.credits-grid -->
+      </div>
+    </section>
+
+    <!-- ---- ABOUT + CTA ---- -->
+    <section id="about" aria-labelledby="about-heading">
+      <div class="container">
+
+        <div class="about-grid">
+          <!-- Avatar -->
+          <div class="about-avatar" aria-hidden="true">
+            <img src="images/profile.jpg" alt="Forrest Blais"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="avatar-placeholder" style="display:none;">FB</div>
+          </div>
+
+          <!-- Text -->
+          <div class="about-text">
+            <h2 id="about-heading">Forrest Blais</h2>
+            <p class="about-role">3D Character Animator — Steel Wool Studios</p>
+            <p class="about-bio">
+              Johnson City, TN-based animator with over a decade of experience across AAA games,
+              Netflix originals, and VR titles — specializing in expressive, performance-driven
+              animation that brings characters to life. From the darkened hallways of Freddy
+              Fazbear's Pizza to the brutal arenas of Mortal Kombat, Forrest's work spans
+              some of gaming's most recognizable franchises.
+            </p>
+            <ul class="skills-list" aria-label="Software skills">
+              <li class="skill-tag">Maya</li>
+              <li class="skill-tag">MotionBuilder</li>
+              <li class="skill-tag">Unreal Engine</li>
+              <li class="skill-tag">Unity</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-strip">
+          <p class="section-label">Let's Create Together</p>
+          <h2>Ready to Collaborate?</h2>
+          <p>
+            Looking for a passionate animator to elevate your next project?
+            Let's connect and make something great.
+          </p>
+          <a href="contact.html" class="btn btn-primary btn-lg">Get In Touch</a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================
+       FOOTER
+       ====================================================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="logo-mark" aria-hidden="true">FB</div>
+            <div class="logo-text">
+              <div class="name">Forrest A Blais</div>
+              <div class="role">Character Animator</div>
+            </div>
+          </div>
+          <p class="footer-desc">
+            Professional 3D character animator with credits on AAA games
+            and VR titles. Available for freelance and studio work.
+          </p>
+          <div class="footer-socials">
+            <a href="https://vimeo.com/forrestblais" class="social-btn vimeo"
+               target="_blank" rel="noopener" aria-label="Vimeo">V</a>
+            <a href="https://www.instagram.com/forrestblaisphotography/" class="social-btn insta"
+               target="_blank" rel="noopener" aria-label="Instagram">I</a>
+            <a href="https://forrestblaisphotos.etsy.com" class="social-btn etsy"
+               target="_blank" rel="noopener" aria-label="Etsy Shop">E</a>
+            <!--
+              TODO: Confirm if these accounts are active, then uncomment:
+              <a href="https://twitter.com/forrestblais" class="social-btn" target="_blank" rel="noopener" aria-label="Twitter/X">𝕏</a>
+              <a href="https://www.youtube.com/forrestblais" class="social-btn" target="_blank" rel="noopener" aria-label="YouTube">Y</a>
+            -->
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Demo Reel</a></li>
+            <li><a href="other-work.html">Other Work</a></li>
+            <li><a href="photography.html">Photography</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Credits -->
+        <div class="footer-col">
+          <h4>Credits</h4>
+          <ul>
+            <li><span>Mortal Kombat 1</span></li>
+            <li><span>FNaF: Help Wanted 2</span></li>
+            <li><span>FNaF: Secret of the Mimic</span></li>
+            <li><span>Blind Fate: Edo no Yami</span></li>
+            <li><span>Kitti Katz (Netflix)</span></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:blaisforrest@gmail.com">blaisforrest@gmail.com</a></li>
+            <li><a href="https://vimeo.com/forrestblais" target="_blank" rel="noopener">Vimeo</a></li>
+            <li><a href="https://forrestblaisphotos.etsy.com" target="_blank" rel="noopener">Etsy Shop</a></li>
+            <li><a href="photography.html">Book a Session</a></li>
+          </ul>
+        </div>
+
+      </div><!-- /.footer-grid -->
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Forrest A Blais. All rights reserved.</p>
+        <a href="https://vimeo.com/forrestblais" target="_blank" rel="noopener">
+          Vimeo Profile ↗
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox (used on photography page; inert here) -->
+  <div class="lightbox" role="dialog" aria-modal="true" aria-label="Image lightbox">
+    <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+    <div class="lightbox-content">
+      <img class="lightbox-img" src="" alt="Gallery image">
+    </div>
+    <button class="lightbox-nav" id="lb-prev" aria-label="Previous image">&#8249;</button>
+    <button class="lightbox-nav" id="lb-next" aria-label="Next image">&#8250;</button>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

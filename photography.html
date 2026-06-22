@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--
+    SEO: Update Johnson City and [STATE] with Forrest's actual location.
+    TODO: Confirm city/region with Forrest before publishing.
+  -->
+  <title>Photography by Forrest Blais | Portraits, Landscapes &amp; Weddings — Johnson City, TN</title>
+  <meta name="description" content="Professional photography by Forrest Blais — portrait sessions, family photos, landscapes, and weddings in Johnson City, TN. Book a session today or shop landscape prints on Etsy.">
+  <meta name="keywords" content="photographer Johnson City, portrait photographer, family photos, landscape photography, wedding photographer, Johnson City photography">
+  <link rel="canonical" href="https://forrestblais.com/photography.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://forrestblais.com/photography.html">
+  <meta property="og:title"       content="Photography by Forrest Blais">
+  <meta property="og:description" content="Portraits, landscapes, and weddings — Johnson City, TN. Book a session or shop prints.">
+  <!-- TODO: Add og:image once hero photography image is available -->
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='16' fill='%2329a3a3'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-family='Arial' font-weight='700' font-size='14' fill='%230b111e'>FB</text></svg>">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* Page-specific overrides */
+    .gallery-section + .gallery-section { padding-top: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="index.html" class="site-logo" aria-label="Forrest Blais home">
+        <div class="logo-mark" aria-hidden="true">FB</div>
+        <div class="logo-text">
+          <div class="name">Forrest Blais</div>
+          <div class="role">Photographer</div>
+        </div>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html">Animation</a>
+        <a href="other-work.html">Other Work</a>
+        <a href="photography.html" class="nav-photo active">📷 Photography</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <button class="menu-toggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button class="menu-close" aria-label="Close menu">&times;</button>
+    <a href="index.html">Animation</a>
+    <a href="other-work.html">Other Work</a>
+    <a href="photography.html" class="nav-photo">📷 Photography</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- MAIN -->
+  <main id="main-content">
+
+    <!-- ---- HERO ---- -->
+    <!--
+      TODO: Replace the background-image URL in styles.css (.photo-hero) with a real
+      hero photograph from Forrest's portfolio once images are available.
+    -->
+    <section class="photo-hero" aria-labelledby="photo-hero-heading">
+      <div class="container photo-hero-content">
+        <p class="section-label">Photography by Forrest Blais</p>
+        <h1 id="photo-hero-heading">
+          <span style="color:var(--fg);">Moments</span>
+          <span style="color:var(--primary);"> Worth</span><br>
+          <span style="color:var(--accent);">Keeping</span>
+        </h1>
+        <p class="subtitle">
+          Portraits · Landscapes · Weddings ·
+          <!-- confirmed: Johnson City, TN -->
+          <span style="color:var(--primary);">Johnson City, TN</span>
+        </p>
+        <p class="hero-location" aria-label="Service area">
+          📍 Based in <strong>Johnson City, TN</strong> — available for travel
+        </p>
+        <div class="photo-hero-btns">
+          <a href="#book" class="btn btn-primary btn-lg">Book a Session</a>
+          <a href="https://forrestblaisphotos.etsy.com"
+             target="_blank" rel="noopener"
+             class="btn btn-outline">Shop Prints on Etsy ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---- GALLERY ---- -->
+    <section class="gallery-section" aria-labelledby="gallery-heading">
+      <div class="container">
+        <p class="section-label">Portfolio</p>
+        <h2 class="section-title" id="gallery-heading">Browse the Work</h2>
+        <div class="section-divider"></div>
+
+        <!--
+          Gallery tabs — filter by category.
+          TODO: Replace all picsum.photos placeholder images with Forrest's
+          actual photography. Aim for 15–20 images per category.
+          Image naming convention: images/portraits/portrait-01.jpg etc.
+        -->
+        <div class="gallery-tabs" role="tablist" aria-label="Gallery categories">
+          <button class="gallery-tab active" data-cat="all" role="tab" aria-selected="true">All</button>
+          <button class="gallery-tab" data-cat="portrait" role="tab" aria-selected="false">Portraits &amp; Families</button>
+          <button class="gallery-tab" data-cat="landscape" role="tab" aria-selected="false">Landscapes</button>
+          <button class="gallery-tab" data-cat="wedding" role="tab" aria-selected="false">Weddings &amp; Events</button>
+        </div>
+
+        <div class="gallery-grid" role="list" aria-label="Photo gallery">
+
+          <!-- ---- PORTRAITS ---- -->
+          <!-- TODO: Replace each src with actual portrait/family photos -->
+          <div class="gallery-item" data-cat="portrait" role="listitem">
+            <img src="https://picsum.photos/seed/portrait01/600/600"
+                 alt="Portrait photography by Forrest Blais — Johnson City, TN"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="portrait" role="listitem">
+            <img src="https://picsum.photos/seed/portrait02/600/600"
+                 alt="Family portrait photography by Forrest Blais"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="portrait" role="listitem">
+            <img src="https://picsum.photos/seed/portrait03/600/600"
+                 alt="Professional headshot photography"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="portrait" role="listitem">
+            <img src="https://picsum.photos/seed/portrait04/600/600"
+                 alt="Outdoor portrait session"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="portrait" role="listitem">
+            <img src="https://picsum.photos/seed/portrait05/600/600"
+                 alt="Family photography session"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="portrait" role="listitem">
+            <img src="https://picsum.photos/seed/portrait06/600/600"
+                 alt="Portrait photography — natural light"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="portrait" role="listitem">
+            <img src="https://picsum.photos/seed/portrait07/600/600"
+                 alt="Children portrait photography"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="portrait" role="listitem">
+            <img src="https://picsum.photos/seed/portrait08/600/600"
+                 alt="Senior portrait photography"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <!-- ---- LANDSCAPES ---- -->
+          <!-- TODO: Replace each src with actual landscape photos -->
+          <div class="gallery-item" data-cat="landscape" role="listitem">
+            <img src="https://picsum.photos/seed/landscape01/600/600"
+                 alt="Landscape photography by Forrest Blais"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="landscape" role="listitem">
+            <img src="https://picsum.photos/seed/landscape02/600/600"
+                 alt="Nature landscape photography"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="landscape" role="listitem">
+            <img src="https://picsum.photos/seed/landscape03/600/600"
+                 alt="Mountain landscape photography"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="landscape" role="listitem">
+            <img src="https://picsum.photos/seed/landscape04/600/600"
+                 alt="Sunset landscape photography"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="landscape" role="listitem">
+            <img src="https://picsum.photos/seed/landscape05/600/600"
+                 alt="Forest landscape photography"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="landscape" role="listitem">
+            <img src="https://picsum.photos/seed/landscape06/600/600"
+                 alt="Water landscape photography"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="landscape" role="listitem">
+            <img src="https://picsum.photos/seed/landscape07/600/600"
+                 alt="Landscape photography — wide angle"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="landscape" role="listitem">
+            <img src="https://picsum.photos/seed/landscape08/600/600"
+                 alt="Landscape print available on Etsy"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <!-- ---- WEDDINGS & EVENTS ---- -->
+          <!-- TODO: Replace each src with actual wedding/event photos -->
+          <div class="gallery-item" data-cat="wedding" role="listitem">
+            <img src="https://picsum.photos/seed/wedding01/600/600"
+                 alt="Wedding photography by Forrest Blais"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="wedding" role="listitem">
+            <img src="https://picsum.photos/seed/wedding02/600/600"
+                 alt="Wedding ceremony photography"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="wedding" role="listitem">
+            <img src="https://picsum.photos/seed/wedding03/600/600"
+                 alt="Wedding reception photography"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="wedding" role="listitem">
+            <img src="https://picsum.photos/seed/wedding04/600/600"
+                 alt="Engagement photography session"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="wedding" role="listitem">
+            <img src="https://picsum.photos/seed/wedding05/600/600"
+                 alt="Wedding couple portrait"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="wedding" role="listitem">
+            <img src="https://picsum.photos/seed/wedding06/600/600"
+                 alt="Outdoor wedding photography"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="wedding" role="listitem">
+            <img src="https://picsum.photos/seed/wedding07/600/600"
+                 alt="Wedding details photography"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+          <div class="gallery-item" data-cat="wedding" role="listitem">
+            <img src="https://picsum.photos/seed/wedding08/600/600"
+                 alt="First dance wedding photography"
+                 loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"><span>⊕</span></div>
+          </div>
+
+        </div><!-- /.gallery-grid -->
+
+        <p style="text-align:center; margin-top:1.5rem; color:var(--muted-fg); font-size:0.85rem;">
+          Shop fine-art landscape prints →
+          <a href="https://forrestblaisphotos.etsy.com"
+             target="_blank" rel="noopener"
+             style="color:var(--accent);">forrestblaisphotos.etsy.com ↗</a>
+        </p>
+
+      </div>
+    </section>
+
+    <!-- ---- SERVICES & PRICING ---- -->
+    <section class="services-section" aria-labelledby="services-heading">
+      <div class="container">
+        <p class="section-label">Work With Me</p>
+        <h2 class="section-title" id="services-heading">Services &amp; Pricing</h2>
+        <div class="section-divider"></div>
+
+        <div class="services-grid">
+
+          <div class="service-card">
+            <div class="service-icon" aria-hidden="true">👤</div>
+            <h3>Portrait &amp; Family</h3>
+            <p class="service-price">Starting at $150</p>
+            <p class="service-desc">
+              1-hour outdoor or studio session. Includes 20+ edited digital images delivered
+              via private gallery. Perfect for individuals, couples, and families.
+            </p>
+            <!-- TODO: Confirm pricing with Forrest -->
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon" aria-hidden="true">💍</div>
+            <h3>Weddings &amp; Events</h3>
+            <p class="service-price">Starting at $1,200</p>
+            <p class="service-desc">
+              Full-day coverage from getting ready to reception. Hundreds of curated,
+              edited images capturing every moment of your big day.
+            </p>
+            <!-- TODO: Confirm pricing with Forrest -->
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon" aria-hidden="true">🏔️</div>
+            <h3>Landscape Prints</h3>
+            <p class="service-price">Sold on Etsy</p>
+            <p class="service-desc">
+              Fine-art landscape prints available in multiple sizes and finishes.
+              Perfect for home or office decor.
+            </p>
+            <a href="https://forrestblaisphotos.etsy.com"
+               target="_blank" rel="noopener"
+               class="service-link">Shop on Etsy ↗</a>
+          </div>
+
+        </div><!-- /.services-grid -->
+      </div>
+    </section>
+
+    <!-- ---- ABOUT PHOTOGRAPHY ---- -->
+    <section class="photo-about-section" aria-labelledby="photo-about-heading">
+      <div class="container">
+        <div class="photo-about-grid">
+
+          <div class="photo-about-img">
+            <!--
+              TODO: Replace with a photo of Forrest with his camera / behind the scenes.
+              Suggested: images/photography-about.jpg
+            -->
+            <img src="https://picsum.photos/seed/photographer-studio/800/1000"
+                 alt="Forrest Blais, photographer — Johnson City, TN"
+                 loading="lazy">
+          </div>
+
+          <div>
+            <p class="section-label">About the Photographer</p>
+            <h2 class="section-title" id="photo-about-heading" style="font-size:clamp(1.6rem,3vw,2.4rem);">
+              More Than a Day Job
+            </h2>
+            <div class="section-divider"></div>
+            <p style="color:var(--muted-fg); line-height:1.9; margin-bottom:1.25rem; font-size:0.96rem;">
+              By day, Forrest animates the characters you see in your favorite video games.
+              Off-hours, he turns that same eye for movement, light, and emotion toward photography.
+            </p>
+            <p style="color:var(--muted-fg); line-height:1.9; margin-bottom:1.25rem; font-size:0.96rem;">
+              Whether it's the golden light of a mountain sunset, the tears and laughter of a
+              wedding day, or a family portrait that truly captures who you are — Forrest brings
+              a storyteller's instinct to every frame.
+            </p>
+            <p style="color:var(--muted-fg); line-height:1.9; margin-bottom:2rem; font-size:0.96rem;">
+              <!-- TODO: Confirm location and any personal details Forrest wants included -->
+              Based in <strong style="color:var(--fg);">Johnson City, TN</strong>,
+              available for travel sessions.
+            </p>
+            <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+              <a href="#book" class="btn btn-primary">Book a Session</a>
+              <a href="https://www.instagram.com/forrestblaisphotography/"
+                 target="_blank" rel="noopener"
+                 class="btn btn-outline">Instagram ↗</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ---- BOOKING FORM ---- -->
+    <section class="booking-section" id="book" aria-labelledby="booking-heading">
+      <div class="container">
+        <div class="booking-form-wrapper">
+          <p class="section-label text-center">Let's Connect</p>
+          <h2 class="section-title text-center" id="booking-heading">Book a Session</h2>
+          <div class="section-divider" style="margin-inline:auto;"></div>
+          <p class="text-center text-muted" style="margin-bottom:2rem; font-size:0.9rem;">
+            Fill out the form below and Forrest will get back to you within 1–2 business days.
+          </p>
+
+          <!--
+            Formspree endpoint: https://formspree.io/f/YOUR_FORM_ID
+            TODO: Sign up at formspree.io (it's free for basic use) and replace
+            YOUR_FORM_ID with your actual form ID. The form will then email
+            submissions to blaisforrest@gmail.com.
+          -->
+          <form class="form-grid"
+                action="https://formspree.io/f/YOUR_FORM_ID"
+                method="POST"
+                aria-label="Photography booking form">
+
+            <div class="form-group">
+              <label for="book-name">Your Name *</label>
+              <input type="text" id="book-name" name="name"
+                     placeholder="Jane Smith"
+                     required autocomplete="name">
+            </div>
+
+            <div class="form-group">
+              <label for="book-email">Email Address *</label>
+              <input type="email" id="book-email" name="email"
+                     placeholder="jane@example.com"
+                     required autocomplete="email">
+            </div>
+
+            <div class="form-group">
+              <label for="book-phone">Phone (optional)</label>
+              <input type="tel" id="book-phone" name="phone"
+                     placeholder="+1 (555) 000-0000"
+                     autocomplete="tel">
+            </div>
+
+            <div class="form-group">
+              <label for="book-date">Preferred Date</label>
+              <input type="date" id="book-date" name="preferred_date">
+            </div>
+
+            <div class="form-group full">
+              <label for="book-session">Session Type *</label>
+              <select id="book-session" name="session_type" required>
+                <option value="" disabled selected>Select a session type…</option>
+                <option value="portrait">Portrait / Individual</option>
+                <option value="family">Family Session</option>
+                <option value="engagement">Engagement</option>
+                <option value="wedding">Wedding / Event</option>
+                <option value="headshot">Professional Headshot</option>
+                <option value="landscape">Landscape / Commercial</option>
+                <option value="other">Other — I'll explain below</option>
+              </select>
+            </div>
+
+            <div class="form-group full">
+              <label for="book-message">Tell Me About Your Vision</label>
+              <textarea id="book-message" name="message"
+                        placeholder="Location ideas, number of people, anything special you have in mind…"></textarea>
+            </div>
+
+            <!-- Honeypot spam filter -->
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" aria-hidden="true">
+
+            <div class="form-group full">
+              <button type="submit" class="btn btn-primary form-submit">
+                Send Request ✉
+              </button>
+              <p class="form-note">
+                I'll respond within 1–2 business days. For urgent inquiries, email
+                <a href="mailto:blaisforrest@gmail.com"
+                   style="color:var(--accent);">blaisforrest@gmail.com</a> directly.
+              </p>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="logo-mark" aria-hidden="true">FB</div>
+            <div class="logo-text">
+              <div class="name">Forrest A Blais</div>
+              <div class="role">Photographer</div>
+            </div>
+          </div>
+          <p class="footer-desc">
+            <!--
+              TODO: Add city/state once confirmed.
+            -->
+            Portrait, landscape, and wedding photographer based in <strong>Johnson City, TN</strong>.
+            Available for travel. Prints sold on Etsy.
+          </p>
+          <div class="footer-socials">
+            <a href="https://www.instagram.com/forrestblaisphotography/" class="social-btn insta" target="_blank" rel="noopener" aria-label="Instagram">I</a>
+            <a href="https://forrestblaisphotos.etsy.com" class="social-btn etsy" target="_blank" rel="noopener" aria-label="Etsy Shop">E</a>
+            <a href="https://vimeo.com/forrestblais" class="social-btn vimeo" target="_blank" rel="noopener" aria-label="Vimeo">V</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Animation Reel</a></li>
+            <li><a href="other-work.html">Other Work</a></li>
+            <li><a href="photography.html">Photography</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Photography</h4>
+          <ul>
+            <li><a href="photography.html#gallery">Portraits &amp; Families</a></li>
+            <li><a href="photography.html#gallery">Landscapes</a></li>
+            <li><a href="photography.html#gallery">Weddings &amp; Events</a></li>
+            <li><a href="https://forrestblaisphotos.etsy.com" target="_blank" rel="noopener">Shop Prints on Etsy ↗</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Book</h4>
+          <ul>
+            <li><a href="#book">Book a Session</a></li>
+            <li><a href="mailto:blaisforrest@gmail.com">blaisforrest@gmail.com</a></li>
+            <li><a href="https://www.instagram.com/forrestblaisphotography/" target="_blank" rel="noopener">Instagram DM</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Forrest A Blais. All rights reserved.</p>
+        <a href="https://forrestblaisphotos.etsy.com" target="_blank" rel="noopener">Shop Etsy Prints ↗</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" role="dialog" aria-modal="true" aria-label="Image lightbox">
+    <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+    <div class="lightbox-content">
+      <img class="lightbox-img" src="" alt="Gallery photo — click outside or press Esc to close">
+    </div>
+    <button class="lightbox-nav" id="lb-prev" aria-label="Previous photo">&#8249;</button>
+    <button class="lightbox-nav" id="lb-next" aria-label="Next photo">&#8250;</button>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
