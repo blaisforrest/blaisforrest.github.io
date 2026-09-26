@@ -88,10 +88,11 @@ if (statsEl) {
 
   if (!track || slides.length === 0) return;
 
-  let current   = 0;
-  let startX    = 0;
-  let isDragging = false;
+  let current      = 0;
+  let startX       = 0;
+  let isDragging   = false;
   let autoTimer;
+  let videoPlaying = false;
 
   function goTo(i) {
     current = ((i % slides.length) + slides.length) % slides.length;
@@ -101,31 +102,69 @@ if (statsEl) {
     if (titleEl) titleEl.textContent = slides[current].dataset.title || '';
   }
 
-  if (prevBtn) prevBtn.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
-  if (nextBtn) nextBtn.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
-  dots.forEach((dot, i) => dot.addEventListener('click', () => { goTo(i); resetAuto(); }));
+  function navigate(i) { videoPlaying = false; goTo(i); resetAuto(); }
+
+  if (prevBtn) prevBtn.addEventListener('click', () => navigate(current - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => navigate(current + 1));
+  dots.forEach((dot, i) => dot.addEventListener('click', () => navigate(i)));
 
   /* Touch / mouse swipe */
   track.addEventListener('touchstart',  e => { startX = e.touches[0].clientX; isDragging = true; }, { passive: true });
   track.addEventListener('touchend',    e => {
     if (!isDragging) return;
     const dx = startX - e.changedTouches[0].clientX;
-    if (Math.abs(dx) > 50) { goTo(current + (dx > 0 ? 1 : -1)); resetAuto(); }
+    if (Math.abs(dx) > 50) navigate(current + (dx > 0 ? 1 : -1));
     isDragging = false;
   });
   track.addEventListener('mousedown',   e => { startX = e.clientX; isDragging = true; e.preventDefault(); });
   window.addEventListener('mouseup',    e => {
     if (!isDragging) return;
     const dx = startX - e.clientX;
-    if (Math.abs(dx) > 50) { goTo(current + (dx > 0 ? 1 : -1)); resetAuto(); }
+    if (Math.abs(dx) > 50) navigate(current + (dx > 0 ? 1 : -1));
     isDragging = false;
   });
 
-  /* Auto-advance */
-  function startAuto() { autoTimer = setInterval(() => goTo(current + 1), 5500); }
-  function resetAuto()  { clearInterval(autoTimer); startAuto(); }
+  /* Auto-advance — stops while a Vimeo video is playing */
+  function startAuto() {
+    clearInterval(autoTimer);
+    if (!videoPlaying) autoTimer = setInterval(() => { if (!videoPlaying) goTo(current + 1); }, 5500);
+  }
+  function resetAuto() { clearInterval(autoTimer); startAuto(); }
   wrapper.addEventListener('mouseenter', () => clearInterval(autoTimer));
-  wrapper.addEventListener('mouseleave', startAuto);
+  wrapper.addEventListener('mouseleave', () => { if (!videoPlaying) startAuto(); });
+
+  /* Listen for Vimeo play/pause/finish events via postMessage */
+  window.addEventListener('message', e => {
+    if (typeof e.origin === 'string' && !e.origin.includes('vimeo.com')) return;
+    let data;
+    try { data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data; } catch (err) { return; }
+    if (!data || !data.event) return;
+    if (data.event === 'play') {
+      videoPlaying = true;
+      clearInterval(autoTimer);
+    } else if (data.event === 'pause' || data.event === 'finish' || data.event === 'ended') {
+      videoPlaying = false;
+      startAuto();
+    }
+  });
+
+  /* Register for Vimeo events once each iframe loads */
+  function registerVimeoListeners() {
+    wrapper.querySelectorAll('iframe[src*="vimeo.com"]').forEach(iframe => {
+      try {
+        ['play', 'pause', 'finish', 'ended'].forEach(evt => {
+          iframe.contentWindow.postMessage(
+            JSON.stringify({ method: 'addEventListener', value: evt }),
+            'https://player.vimeo.com'
+          );
+        });
+      } catch (err) {}
+    });
+  }
+  wrapper.querySelectorAll('iframe[src*="vimeo.com"]').forEach(iframe => {
+    iframe.addEventListener('load', registerVimeoListeners);
+  });
+  registerVimeoListeners();
 
   goTo(0);
   startAuto();
