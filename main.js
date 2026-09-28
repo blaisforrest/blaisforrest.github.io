@@ -242,3 +242,67 @@ if (statsEl) {
     if (e.key === 'ArrowRight') next();
   });
 })();
+
+/* ---- Rope scroll character ---- */
+(function initScrollChar() {
+  const charEl = document.getElementById('scroll-char');
+  const ropeEl = document.getElementById('rope-line');
+  if (!charEl || !ropeEl) return;
+
+  /* Frame helper — returns an <img> tag for a given frame file */
+  const frame = n => {
+    const idx = String(n).padStart(2, '0');
+    return `<img src="images/char-frame-${idx}.png" alt="" style="width:100%;display:block;">`;
+  };
+
+  /* Idle — static frame 0 when not scrolling */
+  const idleFrames = [frame(0)];
+
+  /* Pull frames — 26 frames mapped to scroll progress */
+  const pullFrames = Array.from({length: 26}, (_, i) => frame(i));
+
+  let mode      = 'idle';
+  let stopTimer;
+  let lastPullFrame = -1;
+
+  function updateRope() {
+    const top = charEl.getBoundingClientRect().top;
+    ropeEl.style.height = Math.max(top, 0) + 'px';
+  }
+
+  function startIdle() {
+    mode = 'idle';
+    charEl.className = 'idle';
+    charEl.innerHTML = idleFrames[0];
+  }
+
+  function startPull() {
+    mode = 'pull';
+    charEl.className = 'pull';
+  }
+
+  /* Init */
+  charEl.innerHTML = idleFrames[0];
+  startIdle();
+  updateRope();
+
+  window.addEventListener('scroll', () => {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const progress  = maxScroll > 0 ? Math.min(window.scrollY / maxScroll, 1) : 0;
+
+    if (mode !== 'pull') startPull();
+
+    const fi = Math.min(Math.floor(progress * pullFrames.length), pullFrames.length - 1);
+    if (fi !== lastPullFrame) {
+      charEl.innerHTML = pullFrames[fi];
+      lastPullFrame = fi;
+    }
+
+    updateRope();
+
+    clearTimeout(stopTimer);
+    stopTimer = setTimeout(startIdle, 320);
+  }, { passive: true });
+
+  window.addEventListener('resize', updateRope, { passive: true });
+})();
