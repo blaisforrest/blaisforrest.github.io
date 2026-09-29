@@ -295,8 +295,8 @@ if (statsEl) {
 
     const nb      = navBottom();
     const charH   = charEl.offsetHeight || 200;
-    const topStart = viewH - charH;          /* character bottom flush with viewport bottom */
-    const topEnd   = nb - charH * 0.75;      /* 3/4 above nav, bottom 1/4 still visible */
+    const topStart = viewH - charH - 60;     /* bottom of image ~60px above viewport edge */
+    const topEnd   = nb - charH + 20;        /* bottom of image just ~20px below nav */
     const charTop  = topStart - progress * (topStart - topEnd);
     charEl.style.top = charTop + 'px';
     return progress;
