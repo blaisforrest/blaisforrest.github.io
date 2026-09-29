@@ -259,25 +259,7 @@ if (statsEl) {
   const idleFrames = [frame(0)];
   const pullFrames = Array.from({length: 27}, (_, i) => frame(i));
 
-  let mode = 'idle', stopTimer, windDownTimer, lastPullFrame = 0, lastScrollProgress = -1, currentFrame = 0.0;
-
-  /* Play 6 more frames with increasing delays (ease-out deceleration) then hold */
-  function windDown(fi, step) {
-    if (step >= 3) {
-      /* Stay on whatever frame we landed on — just switch to idle mode */
-      mode = 'idle';
-      charEl.className = 'idle';
-      return;
-    }
-    const delay = 35 + step * 40; // 35, 75, 115, 155, 195, 235ms — slows to a stop
-    windDownTimer = setTimeout(() => {
-      const nextFi = (fi + 1) % pullFrames.length;
-      charEl.innerHTML = pullFrames[nextFi];
-      lastPullFrame = nextFi;
-      currentFrame = nextFi; // keep float accumulator in sync
-      windDown(nextFi, step + 1);
-    }, delay);
-  }
+  let mode = 'idle', stopTimer, lastPullFrame = -1;
 
   /* Height of the sticky nav — rope starts from its bottom edge */
   function navBottom() {
@@ -390,12 +372,8 @@ if (statsEl) {
 
     if (mode !== 'pull') startPull();
 
-    /* Accumulate frames as a float so tiny scroll deltas (arrow keys, slow drag) add up */
-    if (lastScrollProgress < 0) lastScrollProgress = progress;
-    const delta = progress - lastScrollProgress;
-    lastScrollProgress = progress;
-    currentFrame = ((currentFrame + delta * pullFrames.length * CYCLES) % pullFrames.length + pullFrames.length) % pullFrames.length;
-    const fi = Math.floor(currentFrame);
+    /* Frame from absolute scroll position */
+    const fi = Math.floor((progress * pullFrames.length * CYCLES) % pullFrames.length);
     if (fi !== lastPullFrame) {
       charEl.innerHTML = pullFrames[fi];
       lastPullFrame = fi;
@@ -404,8 +382,7 @@ if (statsEl) {
     updateRope();
 
     clearTimeout(stopTimer);
-    clearTimeout(windDownTimer);
-    stopTimer = setTimeout(() => windDown(lastPullFrame, 0), 80);
+    stopTimer = setTimeout(startIdle, 320);
   }, { passive: true });
 
   window.addEventListener('resize', refresh, { passive: true });
