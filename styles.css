@@ -1103,6 +1103,7 @@ section { padding: 5rem 0; }
 #scroll-char img {
   animation: none;
   transform: none;
+  filter: invert(1);
 }
 
 @keyframes ropeSwing {
