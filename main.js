@@ -263,7 +263,7 @@ if (statsEl) {
 
   /* Play 6 more frames with increasing delays (ease-out deceleration) then hold */
   function windDown(fi, step) {
-    if (step >= 6) {
+    if (step >= 3) {
       /* Stay on whatever frame we landed on — just switch to idle mode */
       mode = 'idle';
       charEl.className = 'idle';
