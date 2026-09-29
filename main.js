@@ -259,7 +259,7 @@ if (statsEl) {
   const idleFrames = [frame(0)];
   const pullFrames = Array.from({length: 27}, (_, i) => frame(i));
 
-  let mode = 'idle', stopTimer, lastPullFrame = -1;
+  let mode = 'idle', stopTimer, completionTimer, lastPullFrame = -1;
 
   /* Height of the sticky nav — rope starts from its bottom edge */
   function navBottom() {
@@ -333,7 +333,24 @@ if (statsEl) {
     updateRope();
 
     clearTimeout(stopTimer);
-    stopTimer = setTimeout(startIdle, 320);
+    clearInterval(completionTimer);
+    stopTimer = setTimeout(() => {
+      /* If past frame 3, play through remaining frames before going idle */
+      if (lastPullFrame > 3 && lastPullFrame < pullFrames.length - 1) {
+        let fi = lastPullFrame + 1;
+        completionTimer = setInterval(() => {
+          charEl.innerHTML = pullFrames[fi];
+          lastPullFrame = fi;
+          fi++;
+          if (fi >= pullFrames.length) {
+            clearInterval(completionTimer);
+            startIdle();
+          }
+        }, 60);
+      } else {
+        startIdle();
+      }
+    }, 320);
   }, { passive: true });
 
   window.addEventListener('resize', refresh, { passive: true });
