@@ -307,7 +307,7 @@ if (statsEl) {
 
     if (frameInCycle < 14) {
       // Hold between strokes: small sine dip then recover
-      const t = (frameInCycle - 8) / 5;
+      const t = Math.min((frameInCycle - 8) / 5, 1);
       return 8 - DROP * Math.sin(t * Math.PI);
     }
 
@@ -319,7 +319,7 @@ if (statsEl) {
 
     if (frameInCycle <= 26) {
       // Hold at end: small sine dip then recover
-      const t = (frameInCycle - 21) / 5;
+      const t = Math.min((frameInCycle - 21) / 5, 1);
       return 16 - DROP * Math.sin(t * Math.PI);
     }
 
