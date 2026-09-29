@@ -1103,7 +1103,7 @@ section { padding: 5rem 0; }
 #scroll-char img {
   animation: none;
   transform: none;
-  filter: invert(1);
+  filter: invert(1) sepia(1) saturate(3) hue-rotate(5deg) brightness(1.1);
 }
 
 @keyframes ropeSwing {
