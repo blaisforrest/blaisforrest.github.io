@@ -287,14 +287,43 @@ if (statsEl) {
   charEl.innerHTML = idleFrames[0];
   startIdle();
 
+  /* Ease-in-out curve (quadratic) */
+  function eio(t) { return t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t; }
+
+  /* Small settle drop at hold transitions (in movement units, max 16) */
+  const DROP = 1.2;
+
   /* How many "movement ticks" have elapsed within one animation cycle.
-     Character only rises during frames 1-8 and 14-21 (the pull strokes). */
+     Character eases in/out on pull strokes (frames 1-8 and 14-21) and
+     dips slightly then recovers during holds (frames 9-13, 22-26). */
   function movementAt(frameInCycle) {
-    if (frameInCycle < 1)  return 0;
-    if (frameInCycle <= 8) return frameInCycle - 1;   // frames 1-8  → 0-7
-    if (frameInCycle < 14) return 8;                  // frames 9-13 → hold
-    if (frameInCycle <= 21) return 8 + (frameInCycle - 14); // frames 14-21 → 8-15
-    return 16;                                         // frames 22-26 → hold
+    if (frameInCycle < 1) return 0;
+
+    if (frameInCycle <= 8) {
+      // Pull stroke 1: ease in and out
+      const t = (frameInCycle - 1) / 7;
+      return eio(t) * 8;
+    }
+
+    if (frameInCycle < 14) {
+      // Hold between strokes: small sine dip then recover
+      const t = (frameInCycle - 8) / 5;
+      return 8 - DROP * Math.sin(t * Math.PI);
+    }
+
+    if (frameInCycle <= 21) {
+      // Pull stroke 2: ease in and out
+      const t = (frameInCycle - 14) / 7;
+      return 8 + eio(t) * 8;
+    }
+
+    if (frameInCycle <= 26) {
+      // Hold at end: small sine dip then recover
+      const t = (frameInCycle - 21) / 5;
+      return 16 - DROP * Math.sin(t * Math.PI);
+    }
+
+    return 16;
   }
   const CYCLES               = 4;
   const MOVING_PER_CYCLE     = 16; // 8 frames in 1-8 + 8 frames in 14-21
