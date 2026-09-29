@@ -314,8 +314,8 @@ if (statsEl) {
 
     if (mode !== 'pull') startPull();
 
-    /* Frames count DOWN 25→0 as you scroll down (25 at top, 0 at bottom) */
-    const fi = Math.max(0, pullFrames.length - 1 - Math.min(Math.floor(progress * pullFrames.length), pullFrames.length - 1));
+    /* Frames play forward 0→25 as you scroll down */
+    const fi = Math.min(Math.floor(progress * pullFrames.length), pullFrames.length - 1);
     if (fi !== lastPullFrame) {
       charEl.innerHTML = pullFrames[fi];
       lastPullFrame = fi;
@@ -361,33 +361,23 @@ if (statsEl) {
     const wellScrolled   = Math.max(-spacerTop, 0);
     const p = wellScrollable > 0 ? Math.min(wellScrolled / wellScrollable, 1) : 0;
 
-    /* Darkness: 0 → 0.85 */
-    darkEl.style.opacity = (p * 0.85).toFixed(3);
+    /* Darkness fades in progressively */
+    darkEl.style.opacity = (p * 0.9).toFixed(3);
 
-    /* Brick walls grow inward from sides */
-    const wallStart = 0.05;
-    const wallP = p < wallStart ? 0 : Math.min((p - wallStart) / 0.6, 1);
-    const wallW = Math.floor(wallP * 38); /* up to 38vw each side */
-    leftEl.style.width   = wallW + 'vw';
-    rightEl.style.width  = wallW + 'vw';
-    leftEl.style.opacity  = Math.min(wallP * 2, 1).toFixed(3);
-    rightEl.style.opacity = Math.min(wallP * 2, 1).toFixed(3);
+    /* Hide brick elements */
+    leftEl.style.opacity   = 0;
+    rightEl.style.opacity  = 0;
+    bottomEl.style.opacity = 0;
 
-    /* Bottom brick strip grows up */
-    const bottomP = p < 0.3 ? 0 : Math.min((p - 0.3) / 0.5, 1);
-    bottomEl.style.height  = Math.floor(bottomP * 25) + 'vh';
-    bottomEl.style.opacity = Math.min(bottomP * 2, 1).toFixed(3);
-
-    /* Water — last 20% */
-    const waterP = p < 0.8 ? 0 : (p - 0.8) / 0.2;
-    const waterH = Math.floor(waterP * 35);
-    waterEl.style.height  = waterH + 'vh';
+    /* Water rises from the bottom — last 30% of scroll */
+    const waterP = p < 0.7 ? 0 : (p - 0.7) / 0.3;
+    waterEl.style.height  = Math.floor(waterP * 50) + 'vh';
     waterEl.style.opacity = waterP.toFixed(3);
 
     /* Glow cast upward */
-    const glowOpacity = waterP * 0.8;
+    const glowOpacity = waterP * 0.9;
     glowEl.style.setProperty('--glow-base', glowOpacity.toFixed(3));
-    glowEl.style.height  = Math.floor(waterP * 70) + 'vh';
+    glowEl.style.height  = Math.floor(waterP * 80) + 'vh';
     glowEl.style.opacity = glowOpacity.toFixed(3);
   }
 
