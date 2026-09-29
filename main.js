@@ -253,7 +253,7 @@ if (statsEl) {
   /* Frame helper */
   const frame = n => {
     const idx = String(n).padStart(2, '0');
-    return `<img src="images/char-frame-${idx}.png" alt="" style="width:100%;display:block;">`;
+    return `<img src="images/char-frame-${idx}.png?v=2" alt="" style="width:100%;display:block;">`;
   };
 
   const idleFrames = [frame(0)];
