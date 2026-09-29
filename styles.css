@@ -1135,7 +1135,7 @@ section { padding: 5rem 0; }
   position: fixed;
   pointer-events: none;
   opacity: 0;
-  z-index: 48; /* behind the character (z-index 50) */
+  z-index: 0; /* behind character (1) and content (2) */
 }
 
 #well-water, #well-water-glow {
