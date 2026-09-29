@@ -298,17 +298,23 @@ if (statsEl) {
     const viewH     = (window.visualViewport ? window.visualViewport.height : window.innerHeight);
     const maxScroll = document.documentElement.scrollHeight - viewH;
     const scrolled  = window.scrollY;
-    const progress  = maxScroll > 0 ? 1 - Math.min(scrolled / maxScroll, 1) : 1;
+    const progress  = maxScroll > 0 ? Math.min(scrolled / maxScroll, 1) : 0;
 
-    /* Fade in after 40px of scroll, fade out near the very bottom */
-    const fadeIn  = Math.min(scrolled / 40, 1);
-    const fadeOut = progress < 0.04 ? progress / 0.04 : 1;
-    const opacity = (fadeIn * fadeOut).toFixed(3);
-    charEl.style.opacity = opacity;
-    ropeEl.style.opacity = (opacity * 0.5).toFixed(3);
+    /* Slide character from bottom of viewport up to just below the nav */
+    const nb      = navBottom();
+    const topMin  = nb + 10;                   /* highest point: just below nav */
+    const topMax  = viewH - 200;               /* lowest point: near bottom */
+    const charTop = topMax - progress * (topMax - topMin);
+    charEl.style.top = charTop + 'px';
+
+    /* Fade in after a little scroll */
+    const fadeIn  = Math.min(scrolled / 60, 1);
+    charEl.style.opacity = fadeIn.toFixed(3);
+    ropeEl.style.opacity = (fadeIn * 0.5).toFixed(3);
 
     if (mode !== 'pull') startPull();
 
+    /* Frames play forward: 0 at bottom, 25 at top */
     const fi = Math.min(Math.floor(progress * pullFrames.length), pullFrames.length - 1);
     if (fi !== lastPullFrame) {
       charEl.innerHTML = pullFrames[fi];

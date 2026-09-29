@@ -1091,7 +1091,7 @@ section { padding: 5rem 0; }
 #scroll-char {
   position: fixed;
   right: 6px;
-  top: 0;
+  top: 80vh;
   transform: none;
   width: 90px;
   z-index: 50;
