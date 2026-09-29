@@ -291,7 +291,7 @@ if (statsEl) {
   function eio(t) { return t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t; }
 
   /* Small settle drop at hold transitions (in movement units, max 16) */
-  const DROP = 1.2;
+  const DROP = 0.9;
 
   /* How many "movement ticks" have elapsed within one animation cycle.
      Character eases in/out on pull strokes (frames 1-8 and 14-21) and
