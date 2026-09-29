@@ -1074,9 +1074,9 @@ section { padding: 5rem 0; }
 #rope-line {
   position: fixed;
   right: 51px;           /* centers over the character */
-  top: 0;
+  top: 0;                /* overridden by JS to nav bottom */
   width: 3px;
-  height: 100vh;
+  height: 0;             /* controlled by JS */
   background: repeating-linear-gradient(
     to bottom,
     var(--accent) 0px, var(--accent) 6px,

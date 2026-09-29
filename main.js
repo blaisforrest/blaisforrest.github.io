@@ -245,29 +245,32 @@ if (statsEl) {
 
 /* ---- Rope scroll character ---- */
 (function initScrollChar() {
-  const charEl = document.getElementById('scroll-char');
-  const ropeEl = document.getElementById('rope-line');
+  const charEl   = document.getElementById('scroll-char');
+  const ropeEl   = document.getElementById('rope-line');
+  const headerEl = document.querySelector('.site-header');
   if (!charEl || !ropeEl) return;
 
-  /* Frame helper — returns an <img> tag for a given frame file */
+  /* Frame helper */
   const frame = n => {
     const idx = String(n).padStart(2, '0');
     return `<img src="images/char-frame-${idx}.png" alt="" style="width:100%;display:block;">`;
   };
 
-  /* Idle — static frame 0 when not scrolling */
   const idleFrames = [frame(0)];
-
-  /* Pull frames — 26 frames mapped to scroll progress */
   const pullFrames = Array.from({length: 26}, (_, i) => frame(i));
 
-  let mode      = 'idle';
-  let stopTimer;
-  let lastPullFrame = -1;
+  let mode = 'idle', stopTimer, lastPullFrame = -1;
+
+  /* Height of the sticky nav — rope starts from its bottom edge */
+  function navBottom() {
+    return headerEl ? headerEl.getBoundingClientRect().bottom : 0;
+  }
 
   function updateRope() {
+    const nb  = navBottom();
     const top = charEl.getBoundingClientRect().top;
-    ropeEl.style.height = Math.max(top, 0) + 'px';
+    ropeEl.style.top    = nb + 'px';
+    ropeEl.style.height = Math.max(top - nb, 0) + 'px';
   }
 
   function startIdle() {
@@ -281,15 +284,28 @@ if (statsEl) {
     charEl.className = 'pull';
   }
 
-  /* Init */
+  /* Start hidden; fade in once user scrolls a little */
+  charEl.style.opacity = '0';
+  charEl.style.transition = 'opacity 0.4s ease';
+  ropeEl.style.opacity = '0';
+  ropeEl.style.transition = 'opacity 0.4s ease';
+
   charEl.innerHTML = idleFrames[0];
   startIdle();
   updateRope();
 
   window.addEventListener('scroll', () => {
-    const viewH    = (window.visualViewport ? window.visualViewport.height : window.innerHeight);
+    const viewH     = (window.visualViewport ? window.visualViewport.height : window.innerHeight);
     const maxScroll = document.documentElement.scrollHeight - viewH;
-    const progress  = maxScroll > 0 ? 1 - Math.min(window.scrollY / maxScroll, 1) : 1;
+    const scrolled  = window.scrollY;
+    const progress  = maxScroll > 0 ? 1 - Math.min(scrolled / maxScroll, 1) : 1;
+
+    /* Fade in after 40px of scroll, fade out near the very bottom */
+    const fadeIn  = Math.min(scrolled / 40, 1);
+    const fadeOut = progress < 0.04 ? progress / 0.04 : 1;
+    const opacity = (fadeIn * fadeOut).toFixed(3);
+    charEl.style.opacity = opacity;
+    ropeEl.style.opacity = (opacity * 0.5).toFixed(3);
 
     if (mode !== 'pull') startPull();
 
