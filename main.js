@@ -287,12 +287,33 @@ if (statsEl) {
   charEl.innerHTML = idleFrames[0];
   startIdle();
 
+  /* How many "movement ticks" have elapsed within one animation cycle.
+     Character only rises during frames 1-8 and 14-21 (the pull strokes). */
+  function movementAt(frameInCycle) {
+    if (frameInCycle < 1)  return 0;
+    if (frameInCycle <= 8) return frameInCycle - 1;   // frames 1-8  → 0-7
+    if (frameInCycle < 14) return 8;                  // frames 9-13 → hold
+    if (frameInCycle <= 21) return 8 + (frameInCycle - 14); // frames 14-21 → 8-15
+    return 16;                                         // frames 22-26 → hold
+  }
+  const CYCLES               = 4;
+  const MOVING_PER_CYCLE     = 16; // 8 frames in 1-8 + 8 frames in 14-21
+  const TOTAL_MOVING_FRAMES  = CYCLES * MOVING_PER_CYCLE;
+
   function positionChar() {
     const vp      = window.visualViewport;
     const viewH   = vp ? vp.height : window.innerHeight;
     const maxScroll = document.documentElement.scrollHeight - viewH;
     const scrolled  = window.scrollY;
-    const progress  = maxScroll > 0 ? Math.min(scrolled / maxScroll, 1) : 0;
+    const scrollProgress = maxScroll > 0 ? Math.min(scrolled / maxScroll, 1) : 0;
+
+    /* Map scroll progress → position progress (only advances on pull-stroke frames) */
+    const totalTicks    = scrollProgress * pullFrames.length * CYCLES;
+    const cyclesDone    = Math.floor(totalTicks / pullFrames.length);
+    const frameInCycle  = totalTicks % pullFrames.length;
+    const movTicks      = Math.min(cyclesDone, CYCLES) * MOVING_PER_CYCLE
+                        + movementAt(frameInCycle);
+    const posProgress   = TOTAL_MOVING_FRAMES > 0 ? movTicks / TOTAL_MOVING_FRAMES : 0;
 
     const nb    = navBottom();
     const charH = charEl.offsetHeight || 200;
@@ -302,9 +323,9 @@ if (statsEl) {
     /* End: bottom of image ~20px below nav (clamped so at least 20px still shows) */
     const topEnd   = Math.max(nb - charH + 20, -(charH * 0.8));
 
-    const charTop = topStart - progress * (topStart - topEnd);
+    const charTop = topStart - posProgress * (topStart - topEnd);
     charEl.style.top = charTop + 'px';
-    return progress;
+    return scrollProgress;
   }
 
   function refresh() { positionChar(); updateRope(); }
@@ -322,9 +343,8 @@ if (statsEl) {
 
     if (mode !== 'pull') startPull();
 
-    /* Cycle through all frames repeatedly — 4 full loops across the whole scroll */
-    const cycles = 4;
-    const fi = Math.floor((progress * pullFrames.length * cycles) % pullFrames.length);
+    /* Cycle through all frames repeatedly */
+    const fi = Math.floor((progress * pullFrames.length * CYCLES) % pullFrames.length);
     if (fi !== lastPullFrame) {
       charEl.innerHTML = pullFrames[fi];
       lastPullFrame = fi;
