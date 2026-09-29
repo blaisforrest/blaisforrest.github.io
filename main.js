@@ -288,7 +288,7 @@ if (statsEl) {
 
   window.addEventListener('scroll', () => {
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    const progress  = maxScroll > 0 ? Math.min(window.scrollY / maxScroll, 1) : 0;
+    const progress  = maxScroll > 0 ? 1 - Math.min(window.scrollY / maxScroll, 1) : 1;
 
     if (mode !== 'pull') startPull();
 
