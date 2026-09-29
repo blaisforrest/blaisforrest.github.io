@@ -259,7 +259,19 @@ if (statsEl) {
   const idleFrames = [frame(0)];
   const pullFrames = Array.from({length: 27}, (_, i) => frame(i));
 
-  let mode = 'idle', stopTimer, completionTimer, lastPullFrame = -1;
+  let mode = 'idle', stopTimer, windDownTimer, lastPullFrame = -1;
+
+  /* Play 6 more frames with increasing delays (ease-out deceleration) then go idle */
+  function windDown(fi, step) {
+    if (step >= 6) { startIdle(); return; }
+    const delay = 35 + step * 40; // 35, 75, 115, 155, 195, 235ms — slows to a stop
+    windDownTimer = setTimeout(() => {
+      const nextFi = (fi + 1) % pullFrames.length;
+      charEl.innerHTML = pullFrames[nextFi];
+      lastPullFrame = nextFi;
+      windDown(nextFi, step + 1);
+    }, delay);
+  }
 
   /* Height of the sticky nav — rope starts from its bottom edge */
   function navBottom() {
@@ -382,24 +394,8 @@ if (statsEl) {
     updateRope();
 
     clearTimeout(stopTimer);
-    clearInterval(completionTimer);
-    stopTimer = setTimeout(() => {
-      /* If past frame 3, play through remaining frames before going idle */
-      if (lastPullFrame > 3 && lastPullFrame < pullFrames.length - 1) {
-        let fi = lastPullFrame + 1;
-        completionTimer = setInterval(() => {
-          charEl.innerHTML = pullFrames[fi];
-          lastPullFrame = fi;
-          fi++;
-          if (fi >= pullFrames.length) {
-            clearInterval(completionTimer);
-            startIdle();
-          }
-        }, 60);
-      } else {
-        startIdle();
-      }
-    }, 80);
+    clearTimeout(windDownTimer);
+    stopTimer = setTimeout(() => windDown(lastPullFrame, 0), 80);
   }, { passive: true });
 
   window.addEventListener('resize', refresh, { passive: true });
