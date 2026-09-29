@@ -270,7 +270,7 @@ if (statsEl) {
     const nb  = navBottom();
     const top = charEl.getBoundingClientRect().top;
     ropeEl.style.top    = nb + 'px';
-    ropeEl.style.height = Math.max(top - nb, 0) + 'px';
+    ropeEl.style.height = Math.max(top - nb + charEl.offsetHeight * 0.55, 0) + 'px';
   }
 
   function startIdle() {
