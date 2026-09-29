@@ -276,7 +276,7 @@ if (statsEl) {
   function startIdle() {
     mode = 'idle';
     charEl.className = 'idle';
-    charEl.innerHTML = idleFrames[0];
+    /* hold whatever frame is currently showing */
   }
 
   function startPull() {
