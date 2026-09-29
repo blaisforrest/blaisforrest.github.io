@@ -1077,6 +1077,7 @@ section { padding: 5rem 0; }
   right: 51px;           /* centers over the character */
   top: 0;
   width: 3px;
+  height: 100vh;
   background: repeating-linear-gradient(
     to bottom,
     var(--accent) 0px, var(--accent) 6px,
