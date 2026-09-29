@@ -286,20 +286,29 @@ if (statsEl) {
 
   charEl.innerHTML = idleFrames[0];
   startIdle();
-  updateRope();
 
-  window.addEventListener('scroll', () => {
+  function positionChar() {
     const viewH     = (window.visualViewport ? window.visualViewport.height : window.innerHeight);
     const maxScroll = document.documentElement.scrollHeight - viewH;
     const scrolled  = window.scrollY;
     const progress  = maxScroll > 0 ? Math.min(scrolled / maxScroll, 1) : 0;
 
-    /* Slide character from bottom of viewport up to just below the nav */
     const nb      = navBottom();
-    const topMin  = nb + 10;                   /* highest point: just below nav */
-    const topMax  = viewH - 200;               /* lowest point: near bottom */
+    const topMin  = nb + 10;       /* highest point: just below nav */
+    const topMax  = viewH - 200;   /* lowest point: near bottom */
     const charTop = topMax - progress * (topMax - topMin);
     charEl.style.top = charTop + 'px';
+    return progress;
+  }
+
+  /* Set initial position before any scroll happens */
+  positionChar();
+  charEl.style.opacity = '1';
+  ropeEl.style.opacity = '0.5';
+  updateRope();
+
+  window.addEventListener('scroll', () => {
+    const progress = positionChar();
 
     charEl.style.opacity = '1';
     ropeEl.style.opacity = '0.5';
@@ -320,7 +329,7 @@ if (statsEl) {
     stopTimer = setTimeout(startIdle, 320);
   }, { passive: true });
 
-  window.addEventListener('resize', updateRope, { passive: true });
+  window.addEventListener('resize', () => { positionChar(); updateRope(); }, { passive: true });
 })();
 
 /* ---- Well descent effect ---- */
