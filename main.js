@@ -288,25 +288,31 @@ if (statsEl) {
   startIdle();
 
   function positionChar() {
-    const viewH     = (window.visualViewport ? window.visualViewport.height : window.innerHeight);
+    const vp      = window.visualViewport;
+    const viewH   = vp ? vp.height : window.innerHeight;
     const maxScroll = document.documentElement.scrollHeight - viewH;
     const scrolled  = window.scrollY;
     const progress  = maxScroll > 0 ? Math.min(scrolled / maxScroll, 1) : 0;
 
-    const nb      = navBottom();
-    const charH   = charEl.offsetHeight || 200;
-    const topStart = viewH - charH - 60;     /* bottom of image ~60px above viewport edge */
-    const topEnd   = nb - charH + 20;        /* bottom of image just ~20px below nav */
-    const charTop  = topStart - progress * (topStart - topEnd);
+    const nb    = navBottom();
+    const charH = charEl.offsetHeight || 200;
+
+    /* Start: bottom of image ~60px above viewport edge (clamped so char stays in view) */
+    const topStart = Math.min(viewH - charH - 60, viewH - charH * 0.25);
+    /* End: bottom of image ~20px below nav (clamped so at least 20px still shows) */
+    const topEnd   = Math.max(nb - charH + 20, -(charH * 0.8));
+
+    const charTop = topStart - progress * (topStart - topEnd);
     charEl.style.top = charTop + 'px';
     return progress;
   }
 
+  function refresh() { positionChar(); updateRope(); }
+
   /* Set initial position before any scroll happens */
-  positionChar();
+  refresh();
   charEl.style.opacity = '1';
   ropeEl.style.opacity = '0.5';
-  updateRope();
 
   window.addEventListener('scroll', () => {
     const progress = positionChar();
@@ -330,7 +336,9 @@ if (statsEl) {
     stopTimer = setTimeout(startIdle, 320);
   }, { passive: true });
 
-  window.addEventListener('resize', () => { positionChar(); updateRope(); }, { passive: true });
+  window.addEventListener('resize', refresh, { passive: true });
+  /* Mobile: address bar hide/show changes visualViewport height */
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', refresh);
 })();
 
 /* ---- Well descent effect ---- */
