@@ -261,9 +261,14 @@ if (statsEl) {
 
   let mode = 'idle', stopTimer, windDownTimer, lastPullFrame = -1;
 
-  /* Play 6 more frames with increasing delays (ease-out deceleration) then go idle */
+  /* Play 6 more frames with increasing delays (ease-out deceleration) then hold */
   function windDown(fi, step) {
-    if (step >= 6) { startIdle(); return; }
+    if (step >= 6) {
+      /* Stay on whatever frame we landed on — just switch to idle mode */
+      mode = 'idle';
+      charEl.className = 'idle';
+      return;
+    }
     const delay = 35 + step * 40; // 35, 75, 115, 155, 195, 235ms — slows to a stop
     windDownTimer = setTimeout(() => {
       const nextFi = (fi + 1) % pullFrames.length;
