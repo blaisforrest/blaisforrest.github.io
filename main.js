@@ -293,10 +293,11 @@ if (statsEl) {
     const scrolled  = window.scrollY;
     const progress  = maxScroll > 0 ? Math.min(scrolled / maxScroll, 1) : 0;
 
-    const nb       = navBottom();
-    const topStart = nb + 10;                        /* starts just below nav */
-    const topEnd   = -(charEl.offsetHeight || 200);  /* exits above viewport */
-    const charTop  = topStart - progress * (topStart - topEnd);
+    const nb      = navBottom();
+    const topMin  = nb + 10;               /* just below nav */
+    const topMax  = viewH - 200;           /* bottom of viewport */
+    const travel  = topMax - topMin;       /* same distance as before */
+    const charTop = topMin - progress * travel; /* starts at top, exits above */
     charEl.style.top = charTop + 'px';
     return progress;
   }
