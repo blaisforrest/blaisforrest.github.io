@@ -284,12 +284,6 @@ if (statsEl) {
     charEl.className = 'pull';
   }
 
-  /* Start hidden; fade in once user scrolls a little */
-  charEl.style.opacity = '0';
-  charEl.style.transition = 'opacity 0.4s ease';
-  ropeEl.style.opacity = '0';
-  ropeEl.style.transition = 'opacity 0.4s ease';
-
   charEl.innerHTML = idleFrames[0];
   startIdle();
   updateRope();
@@ -307,10 +301,8 @@ if (statsEl) {
     const charTop = topMax - progress * (topMax - topMin);
     charEl.style.top = charTop + 'px';
 
-    /* Fade in after a little scroll */
-    const fadeIn  = Math.min(scrolled / 60, 1);
-    charEl.style.opacity = fadeIn.toFixed(3);
-    ropeEl.style.opacity = (fadeIn * 0.5).toFixed(3);
+    charEl.style.opacity = '1';
+    ropeEl.style.opacity = '0.5';
 
     if (mode !== 'pull') startPull();
 
