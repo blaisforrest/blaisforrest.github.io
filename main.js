@@ -322,8 +322,8 @@ if (statsEl) {
 
     if (mode !== 'pull') startPull();
 
-    /* Cycle through all frames repeatedly — 8 full loops across the whole scroll */
-    const cycles = 8;
+    /* Cycle through all frames repeatedly — 4 full loops across the whole scroll */
+    const cycles = 4;
     const fi = Math.floor((progress * pullFrames.length * cycles) % pullFrames.length);
     if (fi !== lastPullFrame) {
       charEl.innerHTML = pullFrames[fi];
