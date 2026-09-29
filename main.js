@@ -293,10 +293,10 @@ if (statsEl) {
     const scrolled  = window.scrollY;
     const progress  = maxScroll > 0 ? Math.min(scrolled / maxScroll, 1) : 0;
 
-    const nb      = navBottom();
-    const topMin  = nb + 10;       /* highest point: just below nav */
-    const topMax  = viewH - 200;   /* lowest point: near bottom */
-    const charTop = topMax - progress * (topMax - topMin);
+    const nb       = navBottom();
+    const topStart = nb + 10;                        /* starts just below nav */
+    const topEnd   = -(charEl.offsetHeight || 200);  /* exits above viewport */
+    const charTop  = topStart - progress * (topStart - topEnd);
     charEl.style.top = charTop + 'px';
     return progress;
   }
