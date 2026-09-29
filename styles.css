@@ -1126,12 +1126,18 @@ section { padding: 5rem 0; }
 }
 
 /* Shared well layer base */
-#well-dark, #well-left, #well-right, #well-bottom-bricks,
+#well-dark, #well-left, #well-right, #well-bottom-bricks {
+  position: fixed;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 48; /* behind the character (z-index 50) */
+}
+
 #well-water, #well-water-glow {
   position: fixed;
   pointer-events: none;
   opacity: 0;
-  z-index: 60;
+  z-index: 55; /* in front of the character */
 }
 
 /* Overall darkness */
