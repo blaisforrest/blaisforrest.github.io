@@ -445,7 +445,7 @@ section { padding: 5rem 0; }
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
-.carousel-wrapper { position: relative; }
+.carousel-wrapper { position: relative; z-index: 60; }
 
 .carousel-track-container {
   overflow: hidden;
@@ -1083,14 +1083,14 @@ section { padding: 5rem 0; }
     transparent 6px, transparent 10px
   );
   opacity: 0.4;
-  z-index: 200;
+  z-index: 50;
   pointer-events: none;
   transition: opacity 0.3s;
 }
 
 #main-content {
   position: relative;
-  z-index: 2;
+  /* no z-index — lets carousel and character have independent root stacking contexts */
 }
 
 #scroll-char {
@@ -1099,7 +1099,7 @@ section { padding: 5rem 0; }
   top: 80vh;
   transform: none;
   width: 90px;
-  z-index: 200;
+  z-index: 50;
   pointer-events: none;
   user-select: none;
   color: var(--accent);  /* SVGs use currentColor for stroke */
