@@ -257,7 +257,7 @@ if (statsEl) {
   };
 
   const idleFrames = [frame(0)];
-  const pullFrames = Array.from({length: 26}, (_, i) => frame(i));
+  const pullFrames = Array.from({length: 27}, (_, i) => frame(i));
 
   let mode = 'idle', stopTimer, lastPullFrame = -1;
 
