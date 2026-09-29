@@ -259,7 +259,7 @@ if (statsEl) {
   const idleFrames = [frame(0)];
   const pullFrames = Array.from({length: 27}, (_, i) => frame(i));
 
-  let mode = 'idle', stopTimer, windDownTimer, lastPullFrame = -1;
+  let mode = 'idle', stopTimer, windDownTimer, lastPullFrame = 0, lastScrollProgress = -1;
 
   /* Play 6 more frames with increasing delays (ease-out deceleration) then hold */
   function windDown(fi, step) {
@@ -389,8 +389,12 @@ if (statsEl) {
 
     if (mode !== 'pull') startPull();
 
-    /* Cycle through all frames repeatedly */
-    const fi = Math.floor((progress * pullFrames.length * CYCLES) % pullFrames.length);
+    /* Advance frames by scroll delta so wind-down landing position is preserved */
+    if (lastScrollProgress < 0) lastScrollProgress = progress;
+    const delta = progress - lastScrollProgress;
+    lastScrollProgress = progress;
+    const rawFi = lastPullFrame + delta * pullFrames.length * CYCLES;
+    const fi = Math.floor(((rawFi % pullFrames.length) + pullFrames.length) % pullFrames.length);
     if (fi !== lastPullFrame) {
       charEl.innerHTML = pullFrames[fi];
       lastPullFrame = fi;
