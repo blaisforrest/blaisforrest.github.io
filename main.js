@@ -350,7 +350,7 @@ if (statsEl) {
       } else {
         startIdle();
       }
-    }, 320);
+    }, 80);
   }, { passive: true });
 
   window.addEventListener('resize', refresh, { passive: true });
