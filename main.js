@@ -314,8 +314,9 @@ if (statsEl) {
 
     if (mode !== 'pull') startPull();
 
-    /* Frames play forward 0→25 as you scroll down */
-    const fi = Math.min(Math.floor(progress * pullFrames.length), pullFrames.length - 1);
+    /* Cycle through all frames repeatedly — 8 full loops across the whole scroll */
+    const cycles = 8;
+    const fi = Math.floor((progress * pullFrames.length * cycles) % pullFrames.length);
     if (fi !== lastPullFrame) {
       charEl.innerHTML = pullFrames[fi];
       lastPullFrame = fi;
