@@ -1109,7 +1109,7 @@ section { padding: 5rem 0; }
   animation: none;
   transform: none;
   /* Target: --primary hsl(38, 85%, 55%) golden amber */
-  filter: invert(1) sepia(1) saturate(4) hue-rotate(5deg) brightness(0.6);
+  filter: invert(1) sepia(1) saturate(2.5) hue-rotate(-15deg) brightness(0.7);
 }
 
 @keyframes ropeSwing {
