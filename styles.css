@@ -1079,7 +1079,7 @@ section { padding: 5rem 0; }
   height: 0;             /* controlled by JS */
   background: repeating-linear-gradient(
     to bottom,
-    var(--accent) 0px, var(--accent) 6px,
+    var(--primary) 0px, var(--primary) 6px,
     transparent 6px, transparent 10px
   );
   opacity: 0.4;
@@ -1108,7 +1108,8 @@ section { padding: 5rem 0; }
 #scroll-char img {
   animation: none;
   transform: none;
-  filter: invert(1) sepia(1) saturate(3) hue-rotate(5deg) brightness(1.1);
+  /* Target: --primary hsl(38, 85%, 55%) golden amber */
+  filter: invert(1) sepia(1) saturate(2) brightness(0.9);
 }
 
 @keyframes ropeSwing {
