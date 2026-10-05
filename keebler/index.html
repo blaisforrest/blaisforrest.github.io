@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Neighbors</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#2B3F36">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Neighbors">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<style>
+:root { --bg:#F4F2EA; --surface:#FFFFFF; --ink:#1B2620; --muted:#5A665D; --line:#D6D9CC; --accent:#2B3F36; --accent-ink:#FFFFFF; --err:#B3261E; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0F1512; --surface:#182120; --ink:#E7EEE8; --muted:#98A89E; --line:#2C3A36; --accent:#8FC9B0; --accent-ink:#0B1B14; --err:#FF8A80; } }
+*,*::before,*::after { box-sizing:border-box; }
+html,body { margin:0; height:100%; background:var(--bg); color:var(--ink); font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif; }
+main { min-height:100%; display:grid; place-items:center; padding:max(24px,env(safe-area-inset-top)) 20px max(24px,env(safe-area-inset-bottom)); }
+form { width:100%; max-width:380px; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:26px 22px; }
+h1 { margin:0 0 4px; font-size:22px; }
+p { margin:0 0 18px; color:var(--muted); font-size:15px; }
+label.f { display:block; font-weight:600; font-size:14px; margin-bottom:6px; }
+.row { display:flex; gap:8px; }
+input[type=password],input[type=text] { flex:1; min-width:0; font:inherit; font-size:17px; padding:12px; border:1px solid var(--line); border-radius:10px; background:var(--bg); color:var(--ink); }
+button { font:inherit; font-weight:600; border-radius:10px; border:1px solid var(--line); background:var(--surface); color:var(--ink); padding:0 14px; min-height:46px; cursor:pointer; }
+button.go { width:100%; margin-top:16px; background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
+button:disabled { opacity:.6; cursor:default; }
+:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+.rem { display:flex; align-items:center; gap:8px; margin-top:14px; font-size:14px; color:var(--muted); }
+.rem input { width:18px; height:18px; }
+#msg { min-height:1.4em; margin:12px 0 0; font-size:14px; color:var(--err); }
+</style>
+</head>
+<body>
+<main>
+<form id="f" autocomplete="off">
+  <h1>Neighbors</h1>
+  <p>Enter the passphrase to open.</p>
+  <label class="f" for="pw">Passphrase</label>
+  <div class="row"><input id="pw" type="password" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="off" required><button type="button" id="show" aria-pressed="false">Show</button></div>
+  <label class="rem"><input type="checkbox" id="rem" checked> Stay unlocked on this device</label>
+  <button class="go" id="go" type="submit">Unlock</button>
+  <p id="msg" role="alert"></p>
+  <noscript><p>This page needs JavaScript.</p></noscript>
+</form>
+</main>
+<script>
+(function () {
+  var ITER = 600000, KEYSTORE = 'nb-k';
+  var $ = function (i) { return document.getElementById(i); };
+  var enc = new TextEncoder(), dec = new TextDecoder();
+  function b64e(buf) { var s = '', a = new Uint8Array(buf); for (var i = 0; i < a.length; i++) s += String.fromCharCode(a[i]); return btoa(s); }
+  function b64d(str) { var s = atob(str), a = new Uint8Array(s.length); for (var i = 0; i < s.length; i++) a[i] = s.charCodeAt(i); return a; }
+  function norm(p) { return p.trim().toLowerCase().replace(/[\s\-]+/g, ' '); }
+  var blobP = null;
+  function getBlob() {
+    if (!blobP) blobP = fetch('app.enc', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error('fetch'); return r.arrayBuffer(); }).then(function (b) {
+      var a = new Uint8Array(b); if (a.length < 40 || a[0] !== 78 || a[1] !== 66 || a[2] !== 49) throw new Error('format'); return a;
+    });
+    return blobP;
+  }
+  function open(html) { document.open(); document.write(html); document.close(); }
+  function decrypt(a, key) {
+    return crypto.subtle.decrypt({ name: 'AES-GCM', iv: a.slice(20, 32), additionalData: enc.encode('nb1') }, key, a.slice(32)).then(function (pt) { return dec.decode(pt); });
+  }
+  function importKey(raw) { return crypto.subtle.importKey('raw', raw, 'AES-GCM', false, ['decrypt']); }
+  function deriveRaw(pass, salt) {
+    return crypto.subtle.importKey('raw', enc.encode(norm(pass)), 'PBKDF2', false, ['deriveBits']).then(function (k) {
+      return crypto.subtle.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt: salt, iterations: ITER }, k, 256);
+    });
+  }
+  function registerSW() { if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) navigator.serviceWorker.register('sw.js').catch(function () {}); }
+  registerSW();
+
+  var stored = null; try { stored = localStorage.getItem(KEYSTORE); } catch (_) {}
+  if (stored && window.crypto && crypto.subtle) {
+    $('go').disabled = true; $('msg').style.color = 'var(--muted)'; $('msg').textContent = 'Opening…';
+    getBlob().then(function (a) { return importKey(b64d(stored)).then(function (k) { return decrypt(a, k); }); }).then(open).catch(function () {
+      try { localStorage.removeItem(KEYSTORE); } catch (_) {}
+      $('go').disabled = false; $('msg').style.color = ''; $('msg').textContent = '';
+    });
+  }
+  $('show').addEventListener('click', function () { var p = $('pw'), on = p.type === 'password'; p.type = on ? 'text' : 'password'; this.textContent = on ? 'Hide' : 'Show'; this.setAttribute('aria-pressed', on); });
+  $('f').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!window.crypto || !crypto.subtle) { $('msg').textContent = 'This browser can’t unlock the page. Open it over https in an up-to-date browser.'; return; }
+    var pass = $('pw').value; if (!pass.trim()) return;
+    $('go').disabled = true; $('msg').style.color = 'var(--muted)'; $('msg').textContent = 'Unlocking…';
+    getBlob().then(function (a) {
+      return deriveRaw(pass, a.slice(4, 20)).then(function (raw) {
+        return importKey(raw).then(function (k) { return decrypt(a, k); }).then(function (html) {
+          if ($('rem').checked) { try { localStorage.setItem(KEYSTORE, b64e(raw)); } catch (_) {} }
+          open(html);
+        });
+      });
+    }).catch(function (err) {
+      $('go').disabled = false; $('msg').style.color = '';
+      $('msg').textContent = (err && err.message === 'fetch') ? 'Couldn’t load the page. Check your connection.' : 'That passphrase didn’t work. Check the words and try again.';
+      $('pw').focus(); $('pw').select();
+    });
+  });
+})();
+</script>
+</body>
+</html>
