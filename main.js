@@ -332,9 +332,12 @@ if (statsEl) {
   function positionChar() {
     const vp      = window.visualViewport;
     const viewH   = vp ? vp.height : window.innerHeight;
-    const maxScroll = document.documentElement.scrollHeight - viewH;
     const scrolled  = window.scrollY;
-    const scrollProgress = maxScroll > 0 ? Math.min(scrolled / maxScroll, 1) : 0;
+
+    /* Pin animation to a fixed scroll window (3 viewport-heights) so it
+       advances at the same speed regardless of how long well-spacer is. */
+    const ANIM_WINDOW = viewH * 3;
+    const scrollProgress = Math.min(scrolled / ANIM_WINDOW, 1);
 
     /* Map scroll progress → position progress (only advances on pull-stroke frames) */
     const totalTicks    = scrollProgress * pullFrames.length * CYCLES;
