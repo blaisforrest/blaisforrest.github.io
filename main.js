@@ -325,9 +325,10 @@ if (statsEl) {
 
     return 16;
   }
-  const CYCLES               = 40;
+  const CYCLES               = 20; // how many times the frame animation loops
+  const POS_CYCLES           = 8;  // fewer cycles for position so each pull feels larger
   const MOVING_PER_CYCLE     = 16; // 8 frames in 1-8 + 8 frames in 14-21
-  const TOTAL_MOVING_FRAMES  = CYCLES * MOVING_PER_CYCLE;
+  const TOTAL_MOVING_FRAMES  = POS_CYCLES * MOVING_PER_CYCLE;
 
   function positionChar() {
     const vp      = window.visualViewport;
@@ -337,12 +338,12 @@ if (statsEl) {
     const maxScroll = document.documentElement.scrollHeight - viewH;
     const scrollProgress = maxScroll > 0 ? Math.min(scrolled / maxScroll, 1) : 0;
 
-    /* Map scroll progress → position progress (only advances on pull-stroke frames) */
-    const totalTicks    = scrollProgress * pullFrames.length * CYCLES;
-    const cyclesDone    = Math.floor(totalTicks / pullFrames.length);
-    const frameInCycle  = totalTicks % pullFrames.length;
-    const movTicks      = Math.min(cyclesDone, CYCLES) * MOVING_PER_CYCLE
-                        + movementAt(frameInCycle);
+    /* Position uses POS_CYCLES so each pull stroke covers more vertical ground */
+    const posTicks      = scrollProgress * pullFrames.length * POS_CYCLES;
+    const posCyclesDone = Math.floor(posTicks / pullFrames.length);
+    const posFrameInCycle = posTicks % pullFrames.length;
+    const movTicks      = Math.min(posCyclesDone, POS_CYCLES) * MOVING_PER_CYCLE
+                        + movementAt(posFrameInCycle);
     const posProgress   = TOTAL_MOVING_FRAMES > 0 ? movTicks / TOTAL_MOVING_FRAMES : 0;
 
     const nb    = navBottom();
