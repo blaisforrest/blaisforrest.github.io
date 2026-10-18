@@ -326,7 +326,7 @@ if (statsEl) {
     return 16;
   }
   const CYCLES               = 20; // how many times the frame animation loops
-  const POS_CYCLES           = 8;  // fewer cycles for position so each pull feels larger
+  const POS_CYCLES           = 12; // fewer cycles for position so each pull feels larger
   const MOVING_PER_CYCLE     = 16; // 8 frames in 1-8 + 8 frames in 14-21
   const TOTAL_MOVING_FRAMES  = POS_CYCLES * MOVING_PER_CYCLE;
 
