@@ -325,7 +325,7 @@ if (statsEl) {
 
     return 16;
   }
-  const CYCLES               = 4;
+  const CYCLES               = 40;
   const MOVING_PER_CYCLE     = 16; // 8 frames in 1-8 + 8 frames in 14-21
   const TOTAL_MOVING_FRAMES  = CYCLES * MOVING_PER_CYCLE;
 
