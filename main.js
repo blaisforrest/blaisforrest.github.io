@@ -334,10 +334,12 @@ if (statsEl) {
     const viewH   = vp ? vp.height : window.innerHeight;
     const scrolled  = window.scrollY;
 
-    /* Pin animation to a fixed scroll window (3 viewport-heights) so it
-       advances at the same speed regardless of how long well-spacer is. */
-    const ANIM_WINDOW = viewH * 3;
-    const scrollProgress = Math.min(scrolled / ANIM_WINDOW, 1);
+    /* Pin animation to the content above well-spacer so the character
+       completes its travel right as the empty scroll space begins.
+       Fall back to the full page height if well-spacer isn't found. */
+    const spacer = document.getElementById('well-spacer');
+    const ANIM_WINDOW = spacer ? spacer.offsetTop : (document.documentElement.scrollHeight - viewH);
+    const scrollProgress = ANIM_WINDOW > 0 ? Math.min(scrolled / ANIM_WINDOW, 1) : 0;
 
     /* Map scroll progress → position progress (only advances on pull-stroke frames) */
     const totalTicks    = scrollProgress * pullFrames.length * CYCLES;
