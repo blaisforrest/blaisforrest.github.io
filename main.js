@@ -73,13 +73,13 @@ if (statsEl) {
   observer.observe(statsEl);
 }
 
-/* ---- Carousel ---- */
+/* ---- Flipbook Carousel ---- */
 (function initCarousel() {
   const wrapper = document.querySelector('.carousel-wrapper');
   if (!wrapper) return;
 
   const track   = wrapper.querySelector('.carousel-track');
-  const slides  = wrapper.querySelectorAll('.carousel-slide');
+  const slides  = Array.from(wrapper.querySelectorAll('.carousel-slide'));
   const dots    = wrapper.querySelectorAll('.carousel-dot');
   const counter = wrapper.querySelector('.carousel-counter');
   const titleEl = wrapper.querySelector('.carousel-title');
@@ -88,18 +88,86 @@ if (statsEl) {
 
   if (!track || slides.length === 0) return;
 
+  const N = slides.length;
   let current      = 0;
+  let animating    = false;
   let startX       = 0;
   let isDragging   = false;
   let autoTimer;
   let videoPlaying = false;
 
-  function goTo(i) {
-    current = ((i % slides.length) + slides.length) % slides.length;
-    track.style.transform = 'translateX(-' + (current * 100) + '%)';
-    dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
-    if (counter) counter.textContent = (current + 1) + ' / ' + slides.length;
-    if (titleEl) titleEl.textContent = slides[current].dataset.title || '';
+  const CLASSES = ['cs-active', 'cs-next', 'cs-next2', 'cs-hidden', 'cs-flip-out', 'cs-flip-in'];
+
+  function clearClasses(el) { el.classList.remove(...CLASSES); }
+
+  /* Assign deck positions without animation (instant) */
+  function setDeckPositions(idx) {
+    slides.forEach((s, i) => {
+      clearClasses(s);
+      const offset = ((i - idx) % N + N) % N;
+      if      (offset === 0)     s.classList.add('cs-active');
+      else if (offset === 1)     s.classList.add('cs-next');
+      else if (offset === 2)     s.classList.add('cs-next2');
+      else                       s.classList.add('cs-hidden');
+    });
+  }
+
+  function updateUI(idx) {
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    if (counter) counter.textContent = (idx + 1) + ' / ' + N;
+    if (titleEl) titleEl.textContent = slides[idx].dataset.title || '';
+  }
+
+  /* Animated go-to (always moves forward through deck) */
+  function goTo(i, direction) {
+    if (animating) return;
+    const next = ((i % N) + N) % N;
+    if (next === current) return;
+    animating = true;
+
+    const outSlide = slides[current];
+    const inSlide  = slides[next];
+
+    /* Snap everything else into non-animating hidden positions quickly */
+    slides.forEach((s, idx) => {
+      if (s === outSlide || s === inSlide) return;
+      clearClasses(s);
+      const offset = ((idx - next) % N + N) % N;
+      if      (offset === 1) s.classList.add('cs-next');
+      else if (offset === 2) s.classList.add('cs-next2');
+      else                   s.classList.add('cs-hidden');
+    });
+
+    /* Flip out the current slide */
+    clearClasses(outSlide);
+    outSlide.classList.add('cs-flip-out');
+    outSlide.style.zIndex = '5';
+
+    /* In-slide starts from cs-next then transitions to cs-active */
+    clearClasses(inSlide);
+    inSlide.classList.add('cs-next');
+    inSlide.style.zIndex = '4';
+
+    /* One frame later, move in-slide to active */
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        clearClasses(inSlide);
+        inSlide.classList.add('cs-active');
+      });
+    });
+
+    const DURATION = 560;
+    setTimeout(() => {
+      outSlide.style.zIndex = '';
+      inSlide.style.zIndex  = '';
+      clearClasses(outSlide);
+      outSlide.classList.add('cs-hidden');
+      current   = next;
+      animating = false;
+      updateUI(current);
+    }, DURATION);
+
+    updateUI(next);
   }
 
   function navigate(i) { videoPlaying = false; goTo(i); resetAuto(); }
@@ -108,23 +176,24 @@ if (statsEl) {
   if (nextBtn) nextBtn.addEventListener('click', () => navigate(current + 1));
   dots.forEach((dot, i) => dot.addEventListener('click', () => navigate(i)));
 
-  /* Touch / mouse swipe */
-  track.addEventListener('touchstart',  e => { startX = e.touches[0].clientX; isDragging = true; }, { passive: true });
-  track.addEventListener('touchend',    e => {
+  /* Touch / mouse swipe on track container */
+  const tc = wrapper.querySelector('.carousel-track-container');
+  tc.addEventListener('touchstart',  e => { startX = e.touches[0].clientX; isDragging = true; }, { passive: true });
+  tc.addEventListener('touchend',    e => {
     if (!isDragging) return;
     const dx = startX - e.changedTouches[0].clientX;
     if (Math.abs(dx) > 50) navigate(current + (dx > 0 ? 1 : -1));
     isDragging = false;
   });
-  track.addEventListener('mousedown',   e => { startX = e.clientX; isDragging = true; e.preventDefault(); });
-  window.addEventListener('mouseup',    e => {
+  tc.addEventListener('mousedown',   e => { startX = e.clientX; isDragging = true; e.preventDefault(); });
+  window.addEventListener('mouseup', e => {
     if (!isDragging) return;
     const dx = startX - e.clientX;
     if (Math.abs(dx) > 50) navigate(current + (dx > 0 ? 1 : -1));
     isDragging = false;
   });
 
-  /* Auto-advance — stops while a Vimeo video is playing */
+  /* Auto-advance */
   function startAuto() {
     clearInterval(autoTimer);
     if (!videoPlaying) autoTimer = setInterval(() => { if (!videoPlaying) goTo(current + 1); }, 5500);
@@ -133,7 +202,7 @@ if (statsEl) {
   wrapper.addEventListener('mouseenter', () => clearInterval(autoTimer));
   wrapper.addEventListener('mouseleave', () => { if (!videoPlaying) startAuto(); });
 
-  /* Listen for Vimeo play/pause/finish events via postMessage */
+  /* Vimeo events */
   window.addEventListener('message', e => {
     if (typeof e.origin === 'string' && !e.origin.includes('vimeo.com')) return;
     let data;
@@ -148,7 +217,6 @@ if (statsEl) {
     }
   });
 
-  /* Register for Vimeo events once each iframe loads */
   function registerVimeoListeners() {
     wrapper.querySelectorAll('iframe[src*="vimeo.com"]').forEach(iframe => {
       try {
@@ -166,7 +234,8 @@ if (statsEl) {
   });
   registerVimeoListeners();
 
-  goTo(0);
+  setDeckPositions(0);
+  updateUI(0);
   startAuto();
 })();
 

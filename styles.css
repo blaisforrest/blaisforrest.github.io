@@ -259,10 +259,10 @@ section { padding: 5rem 0; }
    HERO SECTION
    ============================================================ */
 #hero {
-  min-height: 100vh;
   display: flex;
   align-items: center;
   padding-top: 80px;
+  padding-bottom: 2.5rem;
   position: relative;
   overflow: hidden;
 }
@@ -275,6 +275,16 @@ section { padding: 5rem 0; }
 }
 @media (min-width: 768px) {
   .hero-inner { grid-template-columns: auto 1fr; }
+}
+/* Compact hero: single column, centered text */
+.hero-compact {
+  display: block;
+}
+.hero-compact .hero-text {
+  text-align: center;
+}
+.hero-compact .hero-buttons {
+  justify-content: center;
 }
 
 /* ---- Avatar with Rotating Ring ---- */
@@ -447,28 +457,88 @@ section { padding: 5rem 0; }
 }
 .carousel-wrapper { position: relative; z-index: 60; }
 
+/* ---- Flipbook / stacked-deck carousel ---- */
 .carousel-track-container {
-  overflow: hidden;
+  position: relative;
   border-radius: var(--radius);
-  background: var(--muted);
-  border: 1px solid var(--border);
+  /* 16:9 aspect ratio maintained via padding-bottom on inner */
+  perspective: 1600px;
+  transform-style: preserve-3d;
+}
+/* Invisible sizer to keep 16:9 aspect ratio */
+.carousel-track-container::before {
+  content: '';
+  display: block;
+  padding-bottom: 56.25%;
 }
 .carousel-track {
-  display: flex;
-  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: transform;
+  position: absolute;
+  inset: 0;
   user-select: none;
 }
 .carousel-slide {
-  min-width: 100%;
-  flex-shrink: 0;
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--muted);
+  transition:
+    transform 0.55s cubic-bezier(0.35, 0.05, 0.2, 1),
+    opacity   0.55s cubic-bezier(0.35, 0.05, 0.2, 1),
+    box-shadow 0.55s;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+/* Active (front) card */
+.carousel-slide.cs-active {
+  transform: translateZ(0) rotateY(0deg) scale(1);
+  opacity: 1;
+  z-index: 4;
+  pointer-events: auto;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.55);
+}
+/* Next card peeking out to the right */
+.carousel-slide.cs-next {
+  transform: translateX(3%) rotateY(8deg) scale(0.96) translateZ(-40px);
+  opacity: 0.55;
+  z-index: 3;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+}
+/* Two-behind card (further back) */
+.carousel-slide.cs-next2 {
+  transform: translateX(5.5%) rotateY(13deg) scale(0.93) translateZ(-80px);
+  opacity: 0.28;
+  z-index: 2;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+/* Hidden cards */
+.carousel-slide.cs-hidden {
+  opacity: 0;
+  z-index: 0;
+  transform: translateX(6%) rotateY(16deg) scale(0.91) translateZ(-110px);
+}
+/* Flip-out: departing slide rotates away to the left */
+.carousel-slide.cs-flip-out {
+  transform: translateX(-55%) rotateY(-55deg) scale(0.88) translateZ(-60px);
+  opacity: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+/* Flip-in: incoming slide from peek position into active */
+.carousel-slide.cs-flip-in {
+  transform: translateZ(0) rotateY(0deg) scale(1);
+  opacity: 1;
+  z-index: 4;
+  pointer-events: auto;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.55);
 }
 
 /* 16:9 video container */
 .carousel-video {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
+  position: absolute;
+  inset: 0;
   background: #000;
   overflow: hidden;
 }
@@ -616,6 +686,8 @@ section { padding: 5rem 0; }
   gap: 3rem;
   align-items: center;
   margin-bottom: 4rem;
+  max-width: 860px;
+  margin-inline: auto;
 }
 @media (min-width: 768px) {
   .about-grid { grid-template-columns: auto 1fr; }

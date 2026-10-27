@@ -29,7 +29,7 @@
   <!-- Favicon placeholder — TODO: replace with real favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='16' fill='%2329a3a3'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-family='Arial' font-weight='700' font-size='14' fill='%230b111e'>FB</text></svg>">
 
-  <link rel="stylesheet" href="styles.css?v=21">
+  <link rel="stylesheet" href="styles.css?v=22">
 </head>
 <body>
 
@@ -76,29 +76,9 @@
     <!-- ---- HERO ---- -->
     <section id="hero" aria-labelledby="hero-heading">
       <div class="container">
-        <div class="hero-inner">
+        <div class="hero-inner hero-compact">
 
-          <!-- Avatar with rotating ring -->
-          <div class="avatar-wrapper" aria-hidden="true">
-            <div class="avatar-ring"></div>
-            <div class="avatar-img">
-              <!--
-                TODO: Save your profile photo as images/profile.jpg in the repo.
-                The circular crop and ring animation are handled by CSS.
-                (The photo you shared in chat was not a file attachment,
-                so it couldn't be saved automatically — just add it manually.)
-              -->
-              <img src="images/profile.jpg" alt="Forrest Blais, 3D Character Animator"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="avatar-placeholder" style="display:none;">FB</div>
-            </div>
-            <div class="avatar-badge">
-              <span class="dot"></span>
-              Available for Work
-            </div>
-          </div>
-
-          <!-- Text content -->
+          <!-- Text content — name + title only for compact top strip -->
           <div class="hero-text">
             <p class="hero-label">✦ Animation Portfolio</p>
 
@@ -108,33 +88,6 @@
             </h1>
 
             <p class="hero-title">3D Character Animator</p>
-
-            <p class="hero-tagline">
-              Crafting expressive, performance-driven animation for AAA games,
-              VR experiences, and beyond.
-            </p>
-
-            <!-- Animated stats counter -->
-            <div class="hero-stats" aria-label="Career statistics">
-              <div class="stat">
-                <div class="stat-value">
-                  <span data-count="5">0</span><span>+</span>
-                </div>
-                <p class="stat-label">Years</p>
-              </div>
-              <div class="stat">
-                <div class="stat-value">
-                  <span data-count="5">0</span><span>+</span>
-                </div>
-                <p class="stat-label">Productions</p>
-              </div>
-              <div class="stat">
-                <div class="stat-value">
-                  <span data-count="5">0</span>
-                </div>
-                <p class="stat-label">Credits</p>
-              </div>
-            </div>
 
             <div class="hero-buttons">
               <a href="/files/forrest-blais-resume.pdf"
@@ -433,6 +386,6 @@
   <div id="well-water"></div>
   <div id="well-water-glow"></div>
 
-  <script src="main.js?v=39"></script>
+  <script src="main.js?v=40"></script>
 </body>
 </html>
