@@ -197,12 +197,13 @@
           <p>Use the form below and I'll get back to you as soon as possible.</p>
 
           <!--
-            Formspree endpoint — same form ID as photography booking.
-            TODO: Sign up at formspree.io and replace YOUR_FORM_ID.
-            You may want a separate form for animation vs photography inquiries.
+            Messages go to Photo Desk (desk.forrestblais.com/inquiry, the one public path of the app):
+            they show up on its Today tab. With JavaScript the page sends it in place; without, the
+            form posts and Photo Desk sends the visitor back here with ?sent=1.
           -->
-          <form class="form-grid"
-                action="https://formspree.io/f/YOUR_FORM_ID"
+          <div id="form-status" role="status" aria-live="polite"></div>
+          <form class="form-grid" id="contact-form"
+                action="https://desk.forrestblais.com/inquiry"
                 method="POST"
                 aria-label="Contact form">
 
@@ -249,8 +250,6 @@
 
             <!-- Honeypot -->
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" aria-hidden="true">
-            <!-- Redirect after submit — TODO: Create a thank-you page or use Formspree's default -->
-            <!-- <input type="hidden" name="_next" value="https://forrestblais.com/thank-you.html"> -->
 
             <div class="form-group full">
               <button type="submit" class="btn btn-primary form-submit">
@@ -268,6 +267,32 @@
         </div>
 
       </div><!-- /.contact-layout -->
+      <script>
+      (function () {
+        var form = document.getElementById("contact-form"), box = document.getElementById("form-status");
+        function say(text, good) {
+          box.textContent = text;
+          box.style.cssText = "margin:0 0 16px;padding:12px 14px;border-radius:10px;font-size:15px;" +
+            (good ? "background:rgba(47,184,166,.15);border:1px solid #2fb8a6;color:#d8f5f0" : "background:rgba(226,103,93,.15);border:1px solid #e2675d;color:#f6d6d3");
+        }
+        var q = new URLSearchParams(location.search);
+        if (q.get("sent")) say("Thanks! Your message is on its way. I'll get back to you within 24–48 hours.", true);
+        else if (q.get("error")) say(q.get("error"), false);
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var btn = form.querySelector("button[type=submit]"), label = btn.innerHTML;
+          btn.disabled = true; btn.innerHTML = "Sending…";
+          fetch(form.action, { method: "POST", headers: { "Accept": "application/json" }, body: new URLSearchParams(new FormData(form)) })
+            .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+            .then(function (x) {
+              if (x.ok) { form.reset(); say("Thanks! Your message is on its way. I'll get back to you within 24–48 hours.", true); }
+              else say(x.j.error || "Something went wrong. Please email blaisforrest@gmail.com instead.", false);
+            })
+            .catch(function () { say("Couldn't send just now. Please email blaisforrest@gmail.com instead.", false); })
+            .then(function () { btn.disabled = false; btn.innerHTML = label; box.scrollIntoView({ behavior: "smooth", block: "center" }); });
+        });
+      })();
+      </script>
     </section>
 
   </main>
