@@ -1,6 +1,6 @@
 /* ============================================================
    Forrest Blais Portfolio — styles.css
-   Warm black / orange theme from the tree logo, mobile-first responsive
+   Campfire Forest: evergreen, ember orange, gold, mobile-first responsive
    ============================================================ */
 
 /* ----- Cinzel (headings, logo text). OFL license in fonts/Cinzel-OFL.txt ----- */
@@ -11,18 +11,18 @@
 
 /* ----- CSS Custom Properties ----- */
 :root {
-  --bg:          hsl(15, 12%, 6%);      /* warm black, from the tree logo */
-  --card:        hsl(15, 10%, 10%);
-  --card-hover:  hsl(15, 10%, 13%);
-  --fg:          hsl(30, 30%, 96%);
-  --muted:       hsl(15, 10%, 14%);
-  --muted-fg:    hsl(25, 12%, 63%);
-  --border:      hsl(15, 10%, 17%);
-  --primary:     hsl(30, 97%, 60%);     /* logo orange-gold */
-  --primary-dk:  hsl(15, 12%, 5%);
-  --accent:      hsl(8, 85%, 60%);      /* logo coral */
-  --accent-lt:   hsl(14, 95%, 70%);
-  --accent-glow: hsla(8, 85%, 60%, 0.25);
+  --bg:          hsl(158, 27%, 8%);     /* #0F1A16 deep evergreen (Campfire Forest) */
+  --card:        hsl(150, 22%, 12%);    /* #18261F */
+  --card-hover:  hsl(150, 20%, 15%);
+  --fg:          hsl(40, 45%, 91%);     /* #F2EBDD warm cream */
+  --muted:       hsl(150, 18%, 15%);
+  --muted-fg:    hsl(40, 12%, 66%);
+  --border:      hsl(150, 16%, 19%);
+  --primary:     hsl(22, 75%, 56%);     /* #E3793A ember orange */
+  --primary-dk:  hsl(158, 27%, 6%);
+  --accent:      hsl(42, 78%, 64%);     /* #EBBE5A gold */
+  --accent-lt:   hsl(42, 85%, 72%);
+  --accent-glow: hsla(42, 78%, 64%, 0.25);
   --radius:      0.75rem;
   --radius-full: 999px;
   --transition:  0.25s ease;
@@ -54,7 +54,7 @@ body::before {
   top: 0; right: 0;
   width: 55%; height: 100%;
   background: radial-gradient(ellipse at 80% 35%,
-    hsla(8, 85%, 60%, 0.05) 0%,
+    hsla(42, 78%, 64%, 0.05) 0%,
     transparent 65%);
   pointer-events: none;
   z-index: 0;
@@ -111,7 +111,7 @@ section { padding: 5rem 0; }
   background: var(--primary);
   color: var(--primary-dk);
 }
-.btn-primary:hover { background: hsl(30, 97%, 70%); transform: translateY(-2px); }
+.btn-primary:hover { background: hsl(22, 80%, 66%); transform: translateY(-2px); }
 
 .btn-outline {
   border: 2px solid var(--accent);
@@ -140,7 +140,7 @@ section { padding: 5rem 0; }
   top: 0; left: 0; right: 0;
   z-index: 100;
   padding: 1rem 0;
-  background: hsla(15, 10%, 10%, 0.88);
+  background: hsla(155, 25%, 10%, 0.88);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
@@ -159,7 +159,7 @@ section { padding: 5rem 0; }
   flex-shrink: 0;
 }
 .logo-mark {
-  background: #000 url(images/logo-tree.png) center/cover no-repeat !important;
+  background: #0F1A16 url(images/logo-tree.png) center/cover no-repeat !important;
   color: transparent !important;
   text-indent: -999px;
   overflow: hidden;
@@ -239,7 +239,7 @@ section { padding: 5rem 0; }
 .mobile-menu {
   display: none;
   position: fixed; inset: 0; z-index: 200;
-  background: hsla(15, 10%, 7%, 0.97);
+  background: hsla(155, 25%, 7%, 0.97);
   backdrop-filter: blur(12px);
   flex-direction: column;
   align-items: center;
@@ -352,7 +352,7 @@ section { padding: 5rem 0; }
 /* Placeholder shown until real photo is swapped in */
 .avatar-placeholder {
   width: 100%; height: 100%;
-  background: linear-gradient(135deg, var(--muted), hsl(15, 10%, 20%));
+  background: linear-gradient(135deg, var(--muted), hsl(150, 20%, 20%));
   display: flex; align-items: center; justify-content: center;
   font-size: 3.5rem; font-weight: 700;
   color: var(--accent);
@@ -565,13 +565,13 @@ section { padding: 5rem 0; }
   align-items: center;
   justify-content: center;
   gap: 1.25rem;
-  background: linear-gradient(135deg, hsl(15, 10%, 11%), hsl(15, 10%, 17%));
+  background: linear-gradient(135deg, hsl(150, 20%, 11%), hsl(150, 20%, 17%));
   color: var(--muted-fg);
   cursor: pointer;
   transition: var(--transition);
   text-decoration: none;
 }
-.video-placeholder:hover { background: linear-gradient(135deg, hsl(15, 10%, 13%), hsl(15, 10%, 20%)); }
+.video-placeholder:hover { background: linear-gradient(135deg, hsl(150, 20%, 13%), hsl(150, 20%, 20%)); }
 .play-icon {
   width: 68px; height: 68px;
   border-radius: 50%;
@@ -591,7 +591,7 @@ section { padding: 5rem 0; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: hsl(15, 10%, 12%);
+  background: hsl(150, 20%, 12%);
   border-top: 1px solid var(--border);
 }
 .carousel-title { font-weight: 600; font-size: 0.9rem; }
@@ -654,15 +654,15 @@ section { padding: 5rem 0; }
 .credit-card:hover {
   border-color: var(--accent);
   transform: translateY(-4px);
-  box-shadow: 0 10px 40px hsla(8, 85%, 60%, 0.12);
+  box-shadow: 0 10px 40px hsla(42, 78%, 64%, 0.12);
 }
 .credit-type {
   font-size: 0.62rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
-  background: hsla(8, 85%, 60%, 0.1);
-  border: 1px solid hsla(8, 85%, 60%, 0.3);
+  background: hsla(42, 78%, 64%, 0.1);
+  border: 1px solid hsla(42, 78%, 64%, 0.3);
   border-radius: var(--radius-full);
   padding: 0.2rem 0.65rem;
   display: inline-block;
@@ -736,8 +736,8 @@ section { padding: 5rem 0; }
 /* CTA strip */
 .cta-strip {
   background: linear-gradient(135deg,
-    hsl(15, 10%, 12%),
-    hsl(15, 10%, 10%));
+    hsl(150, 20%, 12%),
+    hsl(150, 20%, 10%));
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 3rem 2rem;
@@ -752,7 +752,7 @@ section { padding: 5rem 0; }
    FOOTER
    ============================================================ */
 .site-footer {
-  background: hsl(15, 10%, 8%);
+  background: hsl(150, 20%, 8%);
   border-top: 1px solid var(--border);
   padding: 4rem 0 2rem;
 }
@@ -847,7 +847,7 @@ section { padding: 5rem 0; }
 .work-card:hover {
   border-color: var(--accent);
   transform: translateX(4px);
-  box-shadow: 0 4px 28px hsla(8, 85%, 60%, 0.1);
+  box-shadow: 0 4px 28px hsla(42, 78%, 64%, 0.1);
 }
 .work-meta {
   display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
@@ -855,8 +855,8 @@ section { padding: 5rem 0; }
 .work-type {
   font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--accent);
-  background: hsla(8, 85%, 60%, 0.1);
-  border: 1px solid hsla(8, 85%, 60%, 0.3);
+  background: hsla(42, 78%, 64%, 0.1);
+  border: 1px solid hsla(42, 78%, 64%, 0.3);
   border-radius: var(--radius-full); padding: 0.2rem 0.65rem;
 }
 .work-year { font-size: 0.78rem; color: var(--muted-fg); margin-left: auto; }
@@ -876,9 +876,9 @@ section { padding: 5rem 0; }
   padding: 8rem 0 4rem;
   background:
     linear-gradient(to bottom,
-      hsla(15, 10%, 10%, 0.25) 0%,
-      hsla(15, 10%, 10%, 0.7) 60%,
-      hsl(15, 10%, 10%) 100%),
+      hsla(155, 25%, 10%, 0.25) 0%,
+      hsla(155, 25%, 10%, 0.7) 60%,
+      hsl(150, 20%, 10%) 100%),
     /* TODO: Replace with actual hero photography image */
     url('https://picsum.photos/seed/forest-landscape/1600/900') center/cover no-repeat;
   position: relative;
@@ -940,7 +940,7 @@ section { padding: 5rem 0; }
 .gallery-item:hover img { transform: scale(1.08); }
 .gallery-overlay {
   position: absolute; inset: 0;
-  background: hsla(15, 10%, 10%, 0.55);
+  background: hsla(155, 25%, 10%, 0.55);
   display: flex; align-items: center; justify-content: center;
   opacity: 0; transition: opacity var(--transition);
 }
@@ -969,7 +969,7 @@ section { padding: 5rem 0; }
 .service-card:hover {
   border-color: var(--accent);
   transform: translateY(-4px);
-  box-shadow: 0 10px 40px hsla(8, 85%, 60%, 0.12);
+  box-shadow: 0 10px 40px hsla(42, 78%, 64%, 0.12);
 }
 .service-icon { font-size: 2.5rem; margin-bottom: 1rem; }
 .service-card h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
@@ -1068,8 +1068,8 @@ section { padding: 5rem 0; }
 .contact-icon {
   width: 44px; height: 44px; flex-shrink: 0;
   border-radius: var(--radius);
-  background: hsla(8, 85%, 60%, 0.1);
-  border: 1px solid hsla(8, 85%, 60%, 0.25);
+  background: hsla(42, 78%, 64%, 0.1);
+  border: 1px solid hsla(42, 78%, 64%, 0.25);
   display: flex; align-items: center; justify-content: center;
   font-size: 1.1rem; color: var(--accent);
 }
@@ -1100,7 +1100,7 @@ section { padding: 5rem 0; }
 .lightbox {
   display: none;
   position: fixed; inset: 0; z-index: 300;
-  background: hsla(15, 10%, 5%, 0.95);
+  background: hsla(155, 25%, 5%, 0.95);
   backdrop-filter: blur(10px);
   align-items: center; justify-content: center;
 }
@@ -1123,7 +1123,7 @@ section { padding: 5rem 0; }
 .lightbox-close:hover { opacity: 1; }
 .lightbox-nav {
   position: fixed; top: 50%; transform: translateY(-50%);
-  background: hsla(15, 10%, 14%, 0.85);
+  background: hsla(155, 25%, 14%, 0.85);
   border: 1px solid var(--border);
   color: var(--fg);
   width: 48px; height: 48px;
