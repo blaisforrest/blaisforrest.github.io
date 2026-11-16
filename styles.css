@@ -3,6 +3,12 @@
    Warm black / orange theme from the tree logo, mobile-first responsive
    ============================================================ */
 
+/* ----- Cinzel (headings, logo text). OFL license in fonts/Cinzel-OFL.txt ----- */
+@font-face { font-family: "Cinzel"; font-weight: 400; font-display: swap; src: url(fonts/cinzel-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Cinzel"; font-weight: 500; font-display: swap; src: url(fonts/cinzel-latin-500-normal.woff2) format("woff2"); }
+@font-face { font-family: "Cinzel"; font-weight: 600; font-display: swap; src: url(fonts/cinzel-latin-600-normal.woff2) format("woff2"); }
+@font-face { font-family: "Cinzel"; font-weight: 700; font-display: swap; src: url(fonts/cinzel-latin-700-normal.woff2) format("woff2"); }
+
 /* ----- CSS Custom Properties ----- */
 :root {
   --bg:          hsl(15, 12%, 6%);      /* warm black, from the tree logo */
@@ -60,7 +66,7 @@ ul { list-style: none; }
 button { cursor: pointer; border: none; background: none; font-family: inherit; color: inherit; }
 
 /* ----- Typography ----- */
-h1, h2, h3, h4 { line-height: 1.2; font-weight: 700; }
+h1, h2, h3, h4 { line-height: 1.2; font-weight: 700; font-family: "Cinzel", Georgia, serif; letter-spacing: 0.02em; }
 
 .section-label {
   font-size: 0.72rem;
@@ -166,7 +172,7 @@ section { padding: 5rem 0; }
   flex-shrink: 0;
   letter-spacing: 0.05em;
 }
-.logo-text .name { font-size: 0.95rem; font-weight: 700; line-height: 1.2; }
+.logo-text .name { font-family: "Cinzel", Georgia, serif; font-size: 0.95rem; font-weight: 700; line-height: 1.2; letter-spacing: 0.04em; }
 .logo-text .role { font-size: 0.7rem; color: var(--muted-fg); }
 
 /* Desktop Nav */
