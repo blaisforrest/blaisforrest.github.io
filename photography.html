@@ -27,29 +27,39 @@
   <link rel="stylesheet" href="styles.css">
 
   <style>
-    .gal-hero{padding:6.5rem 0 1rem;text-align:center}
-    .gal-hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;margin-bottom:.75rem;line-height:1.15}
-    .gal-hero p{color:var(--muted-fg);font-size:1.1rem;line-height:1.7;max-width:620px;margin:0 auto 1.5rem}
-    .gal-actions{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
-    .gal-filters{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:1.5rem 0 1rem}
-    .gal-filters button{padding:.5rem 1rem;border-radius:var(--radius-full);border:1px solid var(--border);color:var(--muted-fg);font-size:.95rem;transition:var(--transition)}
-    .gal-filters button:hover{color:var(--fg);border-color:var(--accent)}
-    .gal-filters button.on{background:var(--accent);border-color:var(--accent);color:var(--primary-dk);font-weight:700}
-    .gal-section{margin-bottom:3rem}
-    .gal-section h2{font-size:1.4rem;margin:0 0 1rem}
+    .ph-hero{position:relative;min-height:min(78vh,720px);display:flex;align-items:flex-end;margin-top:-1px;background:#000 url(images/photography/families/families-06.jpg) center 35%/cover}
+    .ph-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,17,30,.85) 0%,rgba(11,17,30,.45) 45%,rgba(11,17,30,0) 70%),linear-gradient(180deg,rgba(11,17,30,0) 55%,var(--bg) 100%)}
+    .ph-hero h1,.ph-hero p{text-shadow:0 2px 12px rgba(0,0,0,.6)}
+    .ph-hero .container{position:relative;z-index:1;padding-bottom:3rem;padding-top:7rem}
+    .ph-hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;line-height:1.1;margin-bottom:.6rem}
+    .ph-hero p{font-size:1.15rem;color:hsl(210,30%,88%);margin-bottom:1.5rem;max-width:560px}
+    .ph-btns{display:flex;flex-wrap:wrap;gap:.75rem}
+    .ph-sec{padding:3rem 0 1rem}
+    .ph-sec h2{font-size:clamp(1.5rem,3vw,2rem);margin-bottom:.4rem}
+    .ph-sub{color:var(--muted-fg);margin-bottom:1.5rem}
+    .ph-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem}
+    .ph-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem}
+    .ph-card h3{font-size:1.15rem;margin-bottom:.25rem}
+    .ph-price{font-size:2rem;font-weight:800;color:var(--primary);margin:.35rem 0}
+    .ph-card ul{list-style:none;padding:0;margin:0;color:var(--muted-fg);line-height:1.8}
+    .ph-note{color:var(--muted-fg);font-size:.95rem;margin-top:1rem}
     .gal-grid{columns:3 280px;column-gap:12px}
     .gal-grid a{display:block;margin:0 0 12px;break-inside:avoid;border-radius:10px;overflow:hidden;background:var(--card)}
-    .gal-grid img{display:block;width:100%;height:auto;transition:transform .4s ease,opacity .3s}
+    .gal-grid img{display:block;width:100%;height:auto;transition:transform .4s ease}
     .gal-grid a:hover img{transform:scale(1.03)}
-    .gal-cta{text-align:center;padding:2rem 1.5rem 4rem}
-    .gal-cta p{color:var(--muted-fg);margin-bottom:1.25rem;font-size:1.05rem}
+    .ph-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;counter-reset:s}
+    .ph-step{background:var(--card);border-radius:var(--radius);padding:1.25rem 1.4rem;border:1px solid var(--border)}
+    .ph-step b{display:block;font-size:1.05rem;margin-bottom:.3rem}
+    .ph-step b:before{counter-increment:s;content:counter(s);display:inline-grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--accent);color:var(--primary-dk);font-weight:800;margin-right:.6rem;font-size:.9rem}
+    .ph-step span{color:var(--muted-fg)}
+    .ph-cta{text-align:center;padding:3.5rem 1.5rem 4.5rem}
+    .ph-cta p{color:var(--muted-fg);margin-bottom:1.25rem;font-size:1.05rem}
     .lb{position:fixed;inset:0;background:rgba(5,8,15,.94);display:none;align-items:center;justify-content:center;z-index:1000}
     .lb.open{display:flex}
-    .lb img{max-width:92vw;max-height:88vh;border-radius:6px;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+    .lb img{max-width:92vw;max-height:88vh;border-radius:6px}
     .lb button{position:absolute;color:#fff;font-size:2.4rem;line-height:1;padding:.5rem 1rem;opacity:.8}
-    .lb button:hover{opacity:1}
     .lb .x{top:1rem;right:1rem}.lb .prev{left:.5rem;top:50%;transform:translateY(-50%)}.lb .next{right:.5rem;top:50%;transform:translateY(-50%)}
-    @media (max-width:640px){.gal-grid{columns:2;column-gap:8px}.gal-grid a{margin-bottom:8px}.lb .prev,.lb .next{display:none}}
+    @media (max-width:640px){.ph-hero{display:block;min-height:0;padding-top:62vw;background-position:center 30%;background-size:auto 70vw;background-repeat:no-repeat;background-color:var(--bg)}.ph-hero:after{background:linear-gradient(180deg,rgba(11,17,30,0) 35vw,var(--bg) 62vw)}.ph-hero .container{padding-top:0;padding-bottom:1rem}.gal-grid{columns:2;column-gap:8px}.gal-grid a{margin-bottom:8px}.lb .prev,.lb .next{display:none}}
   </style>
 </head>
 <body>
@@ -89,99 +99,107 @@
 
   <!-- MAIN -->
   <main id="main-content">
-    <section class="gal-hero container">
-      <h1>Photography</h1>
-      <p>Families, couples, portraits, headshots and the occasional mountain. Weekend sessions around Johnson City and the Tri-Cities.</p>
-      <div class="gal-actions">
-        <a href="contact.html" class="btn btn-primary">Book a session</a>
-        <a href="https://www.instagram.com/forrestblaisphotography" target="_blank" rel="noopener" class="btn btn-outline">Instagram</a>
-        <a href="https://forrestblaisphotos.etsy.com" target="_blank" rel="noopener" class="btn btn-outline">Prints on Etsy</a>
+    <section class="ph-hero" aria-label="Photography">
+      <div class="container">
+        <h1>Photography</h1>
+        <p>Families, couples, seniors and headshots. Weekend sessions around Johnson City and the Tri-Cities, a few spots a month.</p>
+        <div class="ph-btns">
+          <a href="contact.html" class="btn btn-primary">Book a session</a>
+          <a href="#sessions" class="btn btn-outline">Sessions &amp; pricing</a>
+        </div>
       </div>
     </section>
-    <div class="container">
-      <div class="gal-filters" role="group" aria-label="Filter photos"><button data-f="all" class="on">All</button><button data-f="couples">Couples & engagements</button><button data-f="families">Families</button><button data-f="portraits">Portraits & seniors</button><button data-f="headshots">Headshots</button><button data-f="details">Rings & details</button><button data-f="landscapes">Landscapes & night</button></div>
-      <section class="gal-section" data-cat="couples" id="couples">
-        <h2>Couples & engagements</h2>
-        <div class="gal-grid">
-          <a href="images/photography/couples/couples-01.jpg" data-lb><img src="images/photography/couples/couples-01-sm.jpg" width="1600" height="1066" loading="lazy" alt="Engagement session in East Tennessee"></a>
-          <a href="images/photography/couples/couples-02.jpg" data-lb><img src="images/photography/couples/couples-02-sm.jpg" width="1600" height="1066" loading="lazy" alt="Engagement session in East Tennessee"></a>
-          <a href="images/photography/couples/couples-03.jpg" data-lb><img src="images/photography/couples/couples-03-sm.jpg" width="1600" height="1066" loading="lazy" alt="Engagement session in East Tennessee"></a>
-          <a href="images/photography/couples/couples-04.jpg" data-lb><img src="images/photography/couples/couples-04-sm.jpg" width="900" height="1600" loading="lazy" alt="Engagement session in East Tennessee"></a>
-          <a href="images/photography/couples/couples-05.jpg" data-lb><img src="images/photography/couples/couples-05-sm.jpg" width="1066" height="1600" loading="lazy" alt="Engagement session in East Tennessee"></a>
-          <a href="images/photography/couples/couples-06.jpg" data-lb><img src="images/photography/couples/couples-06-sm.jpg" width="900" height="1600" loading="lazy" alt="Engagement session in East Tennessee"></a>
-          <a href="images/photography/couples/couples-07.jpg" data-lb><img src="images/photography/couples/couples-07-sm.jpg" width="1600" height="1066" loading="lazy" alt="Engagement session in East Tennessee"></a>
-          <a href="images/photography/couples/couples-08.jpg" data-lb><img src="images/photography/couples/couples-08-sm.jpg" width="1600" height="900" loading="lazy" alt="Engagement session in East Tennessee"></a>
-          <a href="images/photography/couples/couples-09.jpg" data-lb><img src="images/photography/couples/couples-09-sm.jpg" width="1024" height="683" loading="lazy" alt="Engagement session in East Tennessee"></a>
-          <a href="images/photography/couples/couples-10.jpg" data-lb><img src="images/photography/couples/couples-10-sm.jpg" width="900" height="1600" loading="lazy" alt="Engagement session in East Tennessee"></a>
-          <a href="images/photography/couples/couples-11.jpg" data-lb><img src="images/photography/couples/couples-11-sm.jpg" width="900" height="1600" loading="lazy" alt="Engagement session in East Tennessee"></a>
-          <a href="images/photography/couples/couples-12.jpg" data-lb><img src="images/photography/couples/couples-12-sm.jpg" width="1600" height="1066" loading="lazy" alt="Engagement session in East Tennessee"></a>
-        </div>
-      </section>
-      <section class="gal-section" data-cat="families" id="families">
-        <h2>Families</h2>
-        <div class="gal-grid">
-          <a href="images/photography/families/families-06.jpg" data-lb><img src="images/photography/families/families-06-sm.jpg" width="1600" height="1068" loading="lazy" alt="Extended family photo"></a>
+
+    <section class="ph-sec container" id="sessions">
+      <h2>Sessions</h2>
+      <p class="ph-sub">Outdoors, relaxed, usually around sunset. Weekends only.</p>
+      <div class="ph-cards">
+        <div class="ph-card"><h3>Family, couples &amp; seniors</h3><div class="ph-price">$175</div><ul><li>1 hour, 1 location</li><li>40+ edited photos</li><li>Online gallery in 2 weeks</li></ul></div>
+        <div class="ph-card"><h3>Mini session</h3><div class="ph-price">$100</div><ul><li>30 minutes</li><li>20 edited photos</li><li>Great for little kids</li></ul></div>
+        <div class="ph-card"><h3>Headshots</h3><div class="ph-price">$85</div><ul><li>30 minutes</li><li>10 edited photos</li><li>A few different looks</li></ul></div>
+      </div>
+      <p class="ph-note">Mini days ($75, 15 minutes) are announced on <a href="https://www.instagram.com/forrestblaisphotography" target="_blank" rel="noopener">Instagram</a>. Every session includes print rights.</p>
+    </section>
+
+    <section class="ph-sec container" id="work">
+      <h2>Recent work</h2>
+      <p class="ph-sub">Tap any photo to see it larger.</p>
+      <div class="gal-grid">
+          <a href="images/photography/couples/couples-01.jpg" data-lb><img src="images/photography/couples/couples-01-sm.jpg" width="1600" height="1066" loading="lazy" alt="Couples session in East Tennessee"></a>
           <a href="images/photography/families/families-05.jpg" data-lb><img src="images/photography/families/families-05-sm.jpg" width="1070" height="1600" loading="lazy" alt="Family photo session"></a>
+          <a href="images/photography/portraits/portraits-01.jpg" data-lb><img src="images/photography/portraits/portraits-01-sm.jpg" width="900" height="1600" loading="lazy" alt="Senior portrait"></a>
+          <a href="images/photography/couples/couples-03.jpg" data-lb><img src="images/photography/couples/couples-03-sm.jpg" width="1600" height="1066" loading="lazy" alt="Couples session in East Tennessee"></a>
+          <a href="images/photography/families/families-03.jpg" data-lb><img src="images/photography/families/families-03-sm.jpg" width="1600" height="1070" loading="lazy" alt="Family photo session"></a>
+          <a href="images/photography/headshots/headshots-01.jpg" data-lb><img src="images/photography/headshots/headshots-01-sm.jpg" width="1066" height="1600" loading="lazy" alt="Headshot"></a>
+          <a href="images/photography/couples/couples-05.jpg" data-lb><img src="images/photography/couples/couples-05-sm.jpg" width="1066" height="1600" loading="lazy" alt="Couples session in East Tennessee"></a>
+          <a href="images/photography/portraits/portraits-04.jpg" data-lb><img src="images/photography/portraits/portraits-04-sm.jpg" width="1600" height="1066" loading="lazy" alt="Portrait session"></a>
+          <a href="images/photography/couples/couples-07.jpg" data-lb><img src="images/photography/couples/couples-07-sm.jpg" width="1600" height="1066" loading="lazy" alt="Couples session in East Tennessee"></a>
+      </div>
+    </section>
+
+    <section class="ph-sec container" id="people">
+      <h2>More families, couples &amp; portraits</h2>
+      <div class="gal-grid">
           <a href="images/photography/families/families-01.jpg" data-lb><img src="images/photography/families/families-01-sm.jpg" width="1600" height="1070" loading="lazy" alt="Family photo session"></a>
           <a href="images/photography/families/families-02.jpg" data-lb><img src="images/photography/families/families-02-sm.jpg" width="1070" height="1600" loading="lazy" alt="Family photo session"></a>
-          <a href="images/photography/families/families-03.jpg" data-lb><img src="images/photography/families/families-03-sm.jpg" width="1600" height="1070" loading="lazy" alt="Family photo session"></a>
           <a href="images/photography/families/families-04.jpg" data-lb><img src="images/photography/families/families-04-sm.jpg" width="1070" height="1600" loading="lazy" alt="Family photo session"></a>
-        </div>
-      </section>
-      <section class="gal-section" data-cat="portraits" id="portraits">
-        <h2>Portraits & seniors</h2>
-        <div class="gal-grid">
-          <a href="images/photography/portraits/portraits-01.jpg" data-lb><img src="images/photography/portraits/portraits-01-sm.jpg" width="900" height="1600" loading="lazy" alt="Portrait session"></a>
+          <a href="images/photography/couples/couples-02.jpg" data-lb><img src="images/photography/couples/couples-02-sm.jpg" width="1600" height="1066" loading="lazy" alt="Couples session in East Tennessee"></a>
+          <a href="images/photography/couples/couples-04.jpg" data-lb><img src="images/photography/couples/couples-04-sm.jpg" width="900" height="1600" loading="lazy" alt="Couples session in East Tennessee"></a>
+          <a href="images/photography/couples/couples-06.jpg" data-lb><img src="images/photography/couples/couples-06-sm.jpg" width="900" height="1600" loading="lazy" alt="Couples session in East Tennessee"></a>
+          <a href="images/photography/couples/couples-08.jpg" data-lb><img src="images/photography/couples/couples-08-sm.jpg" width="1600" height="900" loading="lazy" alt="Couples session in East Tennessee"></a>
+          <a href="images/photography/couples/couples-09.jpg" data-lb><img src="images/photography/couples/couples-09-sm.jpg" width="1024" height="683" loading="lazy" alt="Couples session in East Tennessee"></a>
+          <a href="images/photography/couples/couples-10.jpg" data-lb><img src="images/photography/couples/couples-10-sm.jpg" width="900" height="1600" loading="lazy" alt="Couples session in East Tennessee"></a>
+          <a href="images/photography/couples/couples-11.jpg" data-lb><img src="images/photography/couples/couples-11-sm.jpg" width="900" height="1600" loading="lazy" alt="Couples session in East Tennessee"></a>
+          <a href="images/photography/couples/couples-12.jpg" data-lb><img src="images/photography/couples/couples-12-sm.jpg" width="1600" height="1066" loading="lazy" alt="Couples session in East Tennessee"></a>
           <a href="images/photography/portraits/portraits-02.jpg" data-lb><img src="images/photography/portraits/portraits-02-sm.jpg" width="1600" height="1066" loading="lazy" alt="Portrait session"></a>
           <a href="images/photography/portraits/portraits-03.jpg" data-lb><img src="images/photography/portraits/portraits-03-sm.jpg" width="1280" height="1600" loading="lazy" alt="Portrait session"></a>
-          <a href="images/photography/portraits/portraits-04.jpg" data-lb><img src="images/photography/portraits/portraits-04-sm.jpg" width="1600" height="1066" loading="lazy" alt="Portrait session"></a>
-        </div>
-      </section>
-      <section class="gal-section" data-cat="headshots" id="headshots">
-        <h2>Headshots</h2>
-        <div class="gal-grid">
-          <a href="images/photography/headshots/headshots-01.jpg" data-lb><img src="images/photography/headshots/headshots-01-sm.jpg" width="1066" height="1600" loading="lazy" alt="Headshot"></a>
+          <a href="images/photography/details/details-01.jpg" data-lb><img src="images/photography/details/details-01-sm.jpg" width="1600" height="1066" loading="lazy" alt="Engagement ring detail"></a>
+          <a href="images/photography/details/details-02.jpg" data-lb><img src="images/photography/details/details-02-sm.jpg" width="1068" height="1600" loading="lazy" alt="Engagement ring detail"></a>
+      </div>
+    </section>
+
+    <section class="ph-sec container" id="headshots">
+      <h2>Headshots</h2>
+      <div class="gal-grid">
           <a href="images/photography/headshots/headshots-02.jpg" data-lb><img src="images/photography/headshots/headshots-02-sm.jpg" width="1600" height="1066" loading="lazy" alt="Headshot"></a>
           <a href="images/photography/headshots/headshots-03.jpg" data-lb><img src="images/photography/headshots/headshots-03-sm.jpg" width="900" height="1600" loading="lazy" alt="Headshot"></a>
           <a href="images/photography/headshots/headshots-04.jpg" data-lb><img src="images/photography/headshots/headshots-04-sm.jpg" width="1066" height="1600" loading="lazy" alt="Headshot"></a>
-        </div>
-      </section>
-      <section class="gal-section" data-cat="details" id="details">
-        <h2>Rings & details</h2>
-        <div class="gal-grid">
-          <a href="images/photography/details/details-01.jpg" data-lb><img src="images/photography/details/details-01-sm.jpg" width="1600" height="1066" loading="lazy" alt="Engagement ring and wedding detail"></a>
-          <a href="images/photography/details/details-02.jpg" data-lb><img src="images/photography/details/details-02-sm.jpg" width="1068" height="1600" loading="lazy" alt="Engagement ring and wedding detail"></a>
-          <a href="images/photography/details/details-03.jpg" data-lb><img src="images/photography/details/details-03-sm.jpg" width="1600" height="1067" loading="lazy" alt="Engagement ring and wedding detail"></a>
-          <a href="images/photography/details/details-04.jpg" data-lb><img src="images/photography/details/details-04-sm.jpg" width="900" height="1600" loading="lazy" alt="Engagement ring and wedding detail"></a>
-        </div>
-      </section>
-      <section class="gal-section" data-cat="landscapes" id="landscapes">
-        <h2>Landscapes & night</h2>
-        <div class="gal-grid">
-          <a href="images/photography/landscapes/landscapes-01.jpg" data-lb><img src="images/photography/landscapes/landscapes-01-sm.jpg" width="1066" height="1600" loading="lazy" alt="East Tennessee landscape"></a>
-          <a href="images/photography/landscapes/landscapes-02.jpg" data-lb><img src="images/photography/landscapes/landscapes-02-sm.jpg" width="1066" height="1600" loading="lazy" alt="East Tennessee landscape"></a>
-          <a href="images/photography/landscapes/landscapes-03.jpg" data-lb><img src="images/photography/landscapes/landscapes-03-sm.jpg" width="1068" height="1600" loading="lazy" alt="East Tennessee landscape"></a>
-          <a href="images/photography/landscapes/landscapes-04.jpg" data-lb><img src="images/photography/landscapes/landscapes-04-sm.jpg" width="1600" height="1066" loading="lazy" alt="East Tennessee landscape"></a>
-          <a href="images/photography/landscapes/landscapes-05.jpg" data-lb><img src="images/photography/landscapes/landscapes-05-sm.jpg" width="1066" height="1600" loading="lazy" alt="East Tennessee landscape"></a>
-          <a href="images/photography/landscapes/landscapes-06.jpg" data-lb><img src="images/photography/landscapes/landscapes-06-sm.jpg" width="1067" height="1600" loading="lazy" alt="East Tennessee landscape"></a>
-          <a href="images/photography/landscapes/landscapes-07.jpg" data-lb><img src="images/photography/landscapes/landscapes-07-sm.jpg" width="890" height="1334" loading="lazy" alt="East Tennessee landscape"></a>
-          <a href="images/photography/landscapes/landscapes-08.jpg" data-lb><img src="images/photography/landscapes/landscapes-08-sm.jpg" width="1334" height="890" loading="lazy" alt="East Tennessee landscape"></a>
-          <a href="images/photography/landscapes/landscapes-09.jpg" data-lb><img src="images/photography/landscapes/landscapes-09-sm.jpg" width="1068" height="1600" loading="lazy" alt="East Tennessee landscape"></a>
-        </div>
-      </section>
-    </div>
-    <section class="gal-cta">
-      <p>Sessions start at $75. Weekends only, so spots are limited.</p>
-      <a href="contact.html" class="btn btn-primary">Get in touch</a>
+      </div>
+    </section>
+
+    <section class="ph-sec container" id="prints">
+      <h2>Prints</h2>
+      <p class="ph-sub">Mountains, waterfalls and night skies from around East Tennessee. Available as prints and canvas.</p>
+      <div class="gal-grid">
+          <a href="images/photography/landscapes/landscapes-01.jpg" data-lb><img src="images/photography/landscapes/landscapes-01-sm.jpg" width="1066" height="1600" loading="lazy" alt="East Tennessee landscape print"></a>
+          <a href="images/photography/landscapes/landscapes-02.jpg" data-lb><img src="images/photography/landscapes/landscapes-02-sm.jpg" width="1066" height="1600" loading="lazy" alt="East Tennessee landscape print"></a>
+          <a href="images/photography/landscapes/landscapes-03.jpg" data-lb><img src="images/photography/landscapes/landscapes-03-sm.jpg" width="1068" height="1600" loading="lazy" alt="East Tennessee landscape print"></a>
+          <a href="images/photography/landscapes/landscapes-04.jpg" data-lb><img src="images/photography/landscapes/landscapes-04-sm.jpg" width="1600" height="1066" loading="lazy" alt="East Tennessee landscape print"></a>
+          <a href="images/photography/landscapes/landscapes-05.jpg" data-lb><img src="images/photography/landscapes/landscapes-05-sm.jpg" width="1066" height="1600" loading="lazy" alt="East Tennessee landscape print"></a>
+          <a href="images/photography/landscapes/landscapes-06.jpg" data-lb><img src="images/photography/landscapes/landscapes-06-sm.jpg" width="1067" height="1600" loading="lazy" alt="East Tennessee landscape print"></a>
+          <a href="images/photography/landscapes/landscapes-07.jpg" data-lb><img src="images/photography/landscapes/landscapes-07-sm.jpg" width="890" height="1334" loading="lazy" alt="East Tennessee landscape print"></a>
+          <a href="images/photography/landscapes/landscapes-08.jpg" data-lb><img src="images/photography/landscapes/landscapes-08-sm.jpg" width="1334" height="890" loading="lazy" alt="East Tennessee landscape print"></a>
+          <a href="images/photography/landscapes/landscapes-09.jpg" data-lb><img src="images/photography/landscapes/landscapes-09-sm.jpg" width="1068" height="1600" loading="lazy" alt="East Tennessee landscape print"></a>
+      </div>
+      <p style="margin-top:1rem"><a href="https://forrestblaisphotos.etsy.com" target="_blank" rel="noopener" class="btn btn-outline">Buy prints on Etsy</a></p>
+    </section>
+
+    <section class="ph-sec container" id="how">
+      <h2>How it works</h2>
+      <div class="ph-steps">
+        <div class="ph-step"><b>Send a message</b><span>Tell me who's in the photos and which weekends work.</span></div>
+        <div class="ph-step"><b>Pick a spot</b><span>A park, the mountains, or your backyard. I'll suggest a few.</span></div>
+        <div class="ph-step"><b>Get your gallery</b><span>Edited photos online within 2 weeks, ready to download and print.</span></div>
+      </div>
+    </section>
+
+    <section class="ph-cta">
+      <p>Weekends only, so spots are limited.</p>
+      <a href="contact.html" class="btn btn-primary">Book a session</a>
     </section>
     <div class="lb" role="dialog" aria-modal="true" aria-label="Photo viewer"><button class="x" aria-label="Close">&times;</button><button class="prev" aria-label="Previous">&#8249;</button><img alt=""><button class="next" aria-label="Next">&#8250;</button></div>
     <script>
     (function(){
-      var chips=document.querySelectorAll('.gal-filters button'), secs=document.querySelectorAll('.gal-section');
-      chips.forEach(function(b){b.addEventListener('click',function(){
-        chips.forEach(function(x){x.classList.toggle('on',x===b)});
-        secs.forEach(function(s){s.style.display=(b.dataset.f==='all'||s.dataset.cat===b.dataset.f)?'':'none'});
-      })});
       var lb=document.querySelector('.lb'), img=lb.querySelector('img'), list=[], i=0;
       function vis(){return Array.prototype.filter.call(document.querySelectorAll('[data-lb]'),function(a){return a.offsetParent!==null})}
       function show(n){i=(n+list.length)%list.length; img.src=list[i].href; img.alt=list[i].querySelector('img').alt}
