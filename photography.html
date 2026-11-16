@@ -12,58 +12,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Photography by Forrest Blais | Coming Soon</title>
-  <meta name="description" content="Photography portfolio by Forrest Blais — coming soon. Follow @forrestblaisphotography on Instagram for previews.">
+  <title>Photography by Forrest Blais | Johnson City, TN</title>
+  <meta name="description" content="Couples, engagement, portrait, senior and headshot photography by Forrest Blais in Johnson City and the Tri-Cities, TN.">
   <link rel="canonical" href="https://forrestblais.com/photography.html">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="website">
   <meta property="og:url"         content="https://forrestblais.com/photography.html">
-  <meta property="og:title"       content="Photography by Forrest Blais — Coming Soon">
-  <meta property="og:description" content="Photography portfolio coming soon. Follow along on Instagram for previews.">
+  <meta property="og:title"       content="Photography by Forrest Blais">
+  <meta property="og:description" content="Couples, portraits, headshots and East Tennessee landscapes. Weekend sessions around Johnson City and the Tri-Cities.">
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='16' fill='%2329a3a3'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-family='Arial' font-weight='700' font-size='14' fill='%230b111e'>FB</text></svg>">
 
   <link rel="stylesheet" href="styles.css">
 
   <style>
-    .coming-soon-section {
-      min-height: calc(100vh - 72px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 4rem 1.5rem;
-    }
-    .coming-soon-inner {
-      max-width: 560px;
-    }
-    .coming-soon-icon {
-      font-size: 4rem;
-      margin-bottom: 1.5rem;
-      display: block;
-    }
-    .coming-soon-inner h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 800;
-      margin-bottom: 1rem;
-      line-height: 1.15;
-    }
-    .coming-soon-inner p {
-      color: var(--fg-muted, #8ca0bc);
-      font-size: 1.1rem;
-      line-height: 1.7;
-      margin-bottom: 2rem;
-    }
-    .coming-soon-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-    }
-    .coming-soon-actions .btn {
-      min-width: 180px;
-    }
+    .gal-hero{padding:6.5rem 0 1rem;text-align:center}
+    .gal-hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;margin-bottom:.75rem;line-height:1.15}
+    .gal-hero p{color:var(--muted-fg);font-size:1.1rem;line-height:1.7;max-width:620px;margin:0 auto 1.5rem}
+    .gal-actions{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
+    .gal-filters{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:1.5rem 0 1rem}
+    .gal-filters button{padding:.5rem 1rem;border-radius:var(--radius-full);border:1px solid var(--border);color:var(--muted-fg);font-size:.95rem;transition:var(--transition)}
+    .gal-filters button:hover{color:var(--fg);border-color:var(--accent)}
+    .gal-filters button.on{background:var(--accent);border-color:var(--accent);color:var(--primary-dk);font-weight:700}
+    .gal-section{margin-bottom:3rem}
+    .gal-section h2{font-size:1.4rem;margin:0 0 1rem}
+    .gal-grid{columns:3 280px;column-gap:12px}
+    .gal-grid a{display:block;margin:0 0 12px;break-inside:avoid;border-radius:10px;overflow:hidden;background:var(--card)}
+    .gal-grid img{display:block;width:100%;height:auto;transition:transform .4s ease,opacity .3s}
+    .gal-grid a:hover img{transform:scale(1.03)}
+    .gal-cta{text-align:center;padding:2rem 1.5rem 4rem}
+    .gal-cta p{color:var(--muted-fg);margin-bottom:1.25rem;font-size:1.05rem}
+    .lb{position:fixed;inset:0;background:rgba(5,8,15,.94);display:none;align-items:center;justify-content:center;z-index:1000}
+    .lb.open{display:flex}
+    .lb img{max-width:92vw;max-height:88vh;border-radius:6px;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+    .lb button{position:absolute;color:#fff;font-size:2.4rem;line-height:1;padding:.5rem 1rem;opacity:.8}
+    .lb button:hover{opacity:1}
+    .lb .x{top:1rem;right:1rem}.lb .prev{left:.5rem;top:50%;transform:translateY(-50%)}.lb .next{right:.5rem;top:50%;transform:translateY(-50%)}
+    @media (max-width:640px){.gal-grid{columns:2;column-gap:8px}.gal-grid a{margin-bottom:8px}.lb .prev,.lb .next{display:none}}
   </style>
 </head>
 <body>
@@ -103,27 +89,101 @@
 
   <!-- MAIN -->
   <main id="main-content">
-    <section class="coming-soon-section" aria-labelledby="cs-heading">
-      <div class="coming-soon-inner">
-        <span class="coming-soon-icon" aria-hidden="true">📷</span>
-        <h1 id="cs-heading">
-          <span style="color:var(--fg);">Portfolio</span>
-          <span style="color:var(--primary);"> Coming<br>Soon</span>
-        </h1>
-        <p>
-          I'm putting together a proper gallery of portraits, landscapes, and event photography.
-          In the meantime, follow along on Instagram for previews and recent work.
-        </p>
-        <div class="coming-soon-actions">
-          <a href="https://www.instagram.com/forrestblaisphotography" target="_blank" rel="noopener" class="btn btn-primary">
-            Instagram ↗
-          </a>
-          <a href="https://forrestblaisphotos.etsy.com" target="_blank" rel="noopener" class="btn btn-outline">
-            Shop Prints on Etsy ↗
-          </a>
-        </div>
+    <section class="gal-hero container">
+      <h1>Photography</h1>
+      <p>Couples, portraits, headshots and the occasional mountain. Weekend sessions around Johnson City and the Tri-Cities.</p>
+      <div class="gal-actions">
+        <a href="contact.html" class="btn btn-primary">Book a session</a>
+        <a href="https://www.instagram.com/forrestblaisphotography" target="_blank" rel="noopener" class="btn btn-outline">Instagram</a>
+        <a href="https://forrestblaisphotos.etsy.com" target="_blank" rel="noopener" class="btn btn-outline">Prints on Etsy</a>
       </div>
     </section>
+    <div class="container">
+      <div class="gal-filters" role="group" aria-label="Filter photos"><button data-f="all" class="on">All</button><button data-f="couples">Couples & engagements</button><button data-f="portraits">Portraits & seniors</button><button data-f="headshots">Headshots</button><button data-f="details">Rings & details</button><button data-f="landscapes">Landscapes & night</button></div>
+      <section class="gal-section" data-cat="couples" id="couples">
+        <h2>Couples & engagements</h2>
+        <div class="gal-grid">
+          <a href="images/photography/couples/couples-01.jpg" data-lb><img src="images/photography/couples/couples-01-sm.jpg" width="1600" height="1066" loading="lazy" alt="Engagement session in East Tennessee"></a>
+          <a href="images/photography/couples/couples-02.jpg" data-lb><img src="images/photography/couples/couples-02-sm.jpg" width="1600" height="1066" loading="lazy" alt="Engagement session in East Tennessee"></a>
+          <a href="images/photography/couples/couples-03.jpg" data-lb><img src="images/photography/couples/couples-03-sm.jpg" width="1600" height="1066" loading="lazy" alt="Engagement session in East Tennessee"></a>
+          <a href="images/photography/couples/couples-04.jpg" data-lb><img src="images/photography/couples/couples-04-sm.jpg" width="900" height="1600" loading="lazy" alt="Engagement session in East Tennessee"></a>
+          <a href="images/photography/couples/couples-05.jpg" data-lb><img src="images/photography/couples/couples-05-sm.jpg" width="1066" height="1600" loading="lazy" alt="Engagement session in East Tennessee"></a>
+          <a href="images/photography/couples/couples-06.jpg" data-lb><img src="images/photography/couples/couples-06-sm.jpg" width="900" height="1600" loading="lazy" alt="Engagement session in East Tennessee"></a>
+          <a href="images/photography/couples/couples-07.jpg" data-lb><img src="images/photography/couples/couples-07-sm.jpg" width="1600" height="1066" loading="lazy" alt="Engagement session in East Tennessee"></a>
+          <a href="images/photography/couples/couples-08.jpg" data-lb><img src="images/photography/couples/couples-08-sm.jpg" width="1600" height="900" loading="lazy" alt="Engagement session in East Tennessee"></a>
+          <a href="images/photography/couples/couples-09.jpg" data-lb><img src="images/photography/couples/couples-09-sm.jpg" width="1024" height="683" loading="lazy" alt="Engagement session in East Tennessee"></a>
+          <a href="images/photography/couples/couples-10.jpg" data-lb><img src="images/photography/couples/couples-10-sm.jpg" width="900" height="1600" loading="lazy" alt="Engagement session in East Tennessee"></a>
+          <a href="images/photography/couples/couples-11.jpg" data-lb><img src="images/photography/couples/couples-11-sm.jpg" width="900" height="1600" loading="lazy" alt="Engagement session in East Tennessee"></a>
+          <a href="images/photography/couples/couples-12.jpg" data-lb><img src="images/photography/couples/couples-12-sm.jpg" width="1600" height="1066" loading="lazy" alt="Engagement session in East Tennessee"></a>
+        </div>
+      </section>
+      <section class="gal-section" data-cat="portraits" id="portraits">
+        <h2>Portraits & seniors</h2>
+        <div class="gal-grid">
+          <a href="images/photography/portraits/portraits-01.jpg" data-lb><img src="images/photography/portraits/portraits-01-sm.jpg" width="900" height="1600" loading="lazy" alt="Portrait session"></a>
+          <a href="images/photography/portraits/portraits-02.jpg" data-lb><img src="images/photography/portraits/portraits-02-sm.jpg" width="1600" height="1066" loading="lazy" alt="Portrait session"></a>
+          <a href="images/photography/portraits/portraits-03.jpg" data-lb><img src="images/photography/portraits/portraits-03-sm.jpg" width="1280" height="1600" loading="lazy" alt="Portrait session"></a>
+          <a href="images/photography/portraits/portraits-04.jpg" data-lb><img src="images/photography/portraits/portraits-04-sm.jpg" width="1600" height="1066" loading="lazy" alt="Portrait session"></a>
+        </div>
+      </section>
+      <section class="gal-section" data-cat="headshots" id="headshots">
+        <h2>Headshots</h2>
+        <div class="gal-grid">
+          <a href="images/photography/headshots/headshots-01.jpg" data-lb><img src="images/photography/headshots/headshots-01-sm.jpg" width="1066" height="1600" loading="lazy" alt="Headshot"></a>
+          <a href="images/photography/headshots/headshots-02.jpg" data-lb><img src="images/photography/headshots/headshots-02-sm.jpg" width="1600" height="1066" loading="lazy" alt="Headshot"></a>
+          <a href="images/photography/headshots/headshots-03.jpg" data-lb><img src="images/photography/headshots/headshots-03-sm.jpg" width="900" height="1600" loading="lazy" alt="Headshot"></a>
+          <a href="images/photography/headshots/headshots-04.jpg" data-lb><img src="images/photography/headshots/headshots-04-sm.jpg" width="1066" height="1600" loading="lazy" alt="Headshot"></a>
+        </div>
+      </section>
+      <section class="gal-section" data-cat="details" id="details">
+        <h2>Rings & details</h2>
+        <div class="gal-grid">
+          <a href="images/photography/details/details-01.jpg" data-lb><img src="images/photography/details/details-01-sm.jpg" width="1600" height="1066" loading="lazy" alt="Engagement ring and wedding detail"></a>
+          <a href="images/photography/details/details-02.jpg" data-lb><img src="images/photography/details/details-02-sm.jpg" width="1068" height="1600" loading="lazy" alt="Engagement ring and wedding detail"></a>
+          <a href="images/photography/details/details-03.jpg" data-lb><img src="images/photography/details/details-03-sm.jpg" width="1600" height="1067" loading="lazy" alt="Engagement ring and wedding detail"></a>
+          <a href="images/photography/details/details-04.jpg" data-lb><img src="images/photography/details/details-04-sm.jpg" width="900" height="1600" loading="lazy" alt="Engagement ring and wedding detail"></a>
+        </div>
+      </section>
+      <section class="gal-section" data-cat="landscapes" id="landscapes">
+        <h2>Landscapes & night</h2>
+        <div class="gal-grid">
+          <a href="images/photography/landscapes/landscapes-01.jpg" data-lb><img src="images/photography/landscapes/landscapes-01-sm.jpg" width="1066" height="1600" loading="lazy" alt="East Tennessee landscape"></a>
+          <a href="images/photography/landscapes/landscapes-02.jpg" data-lb><img src="images/photography/landscapes/landscapes-02-sm.jpg" width="1066" height="1600" loading="lazy" alt="East Tennessee landscape"></a>
+          <a href="images/photography/landscapes/landscapes-03.jpg" data-lb><img src="images/photography/landscapes/landscapes-03-sm.jpg" width="1068" height="1600" loading="lazy" alt="East Tennessee landscape"></a>
+          <a href="images/photography/landscapes/landscapes-04.jpg" data-lb><img src="images/photography/landscapes/landscapes-04-sm.jpg" width="1600" height="1066" loading="lazy" alt="East Tennessee landscape"></a>
+          <a href="images/photography/landscapes/landscapes-05.jpg" data-lb><img src="images/photography/landscapes/landscapes-05-sm.jpg" width="1066" height="1600" loading="lazy" alt="East Tennessee landscape"></a>
+          <a href="images/photography/landscapes/landscapes-06.jpg" data-lb><img src="images/photography/landscapes/landscapes-06-sm.jpg" width="1067" height="1600" loading="lazy" alt="East Tennessee landscape"></a>
+          <a href="images/photography/landscapes/landscapes-07.jpg" data-lb><img src="images/photography/landscapes/landscapes-07-sm.jpg" width="890" height="1334" loading="lazy" alt="East Tennessee landscape"></a>
+          <a href="images/photography/landscapes/landscapes-08.jpg" data-lb><img src="images/photography/landscapes/landscapes-08-sm.jpg" width="1334" height="890" loading="lazy" alt="East Tennessee landscape"></a>
+          <a href="images/photography/landscapes/landscapes-09.jpg" data-lb><img src="images/photography/landscapes/landscapes-09-sm.jpg" width="1068" height="1600" loading="lazy" alt="East Tennessee landscape"></a>
+        </div>
+      </section>
+    </div>
+    <section class="gal-cta">
+      <p>Sessions start at $75. Weekends only, so spots are limited.</p>
+      <a href="contact.html" class="btn btn-primary">Get in touch</a>
+    </section>
+    <div class="lb" role="dialog" aria-modal="true" aria-label="Photo viewer"><button class="x" aria-label="Close">&times;</button><button class="prev" aria-label="Previous">&#8249;</button><img alt=""><button class="next" aria-label="Next">&#8250;</button></div>
+    <script>
+    (function(){
+      var chips=document.querySelectorAll('.gal-filters button'), secs=document.querySelectorAll('.gal-section');
+      chips.forEach(function(b){b.addEventListener('click',function(){
+        chips.forEach(function(x){x.classList.toggle('on',x===b)});
+        secs.forEach(function(s){s.style.display=(b.dataset.f==='all'||s.dataset.cat===b.dataset.f)?'':'none'});
+      })});
+      var lb=document.querySelector('.lb'), img=lb.querySelector('img'), list=[], i=0;
+      function vis(){return Array.prototype.filter.call(document.querySelectorAll('[data-lb]'),function(a){return a.offsetParent!==null})}
+      function show(n){i=(n+list.length)%list.length; img.src=list[i].href; img.alt=list[i].querySelector('img').alt}
+      document.addEventListener('click',function(e){var a=e.target.closest('[data-lb]'); if(!a) return; e.preventDefault(); list=vis(); lb.classList.add('open'); show(list.indexOf(a));});
+      lb.querySelector('.x').onclick=function(){lb.classList.remove('open')};
+      lb.querySelector('.prev').onclick=function(e){e.stopPropagation();show(i-1)};
+      lb.querySelector('.next').onclick=function(e){e.stopPropagation();show(i+1)};
+      lb.addEventListener('click',function(e){if(e.target===lb) lb.classList.remove('open')});
+      document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return; if(e.key==='Escape')lb.classList.remove('open'); if(e.key==='ArrowLeft')show(i-1); if(e.key==='ArrowRight')show(i+1)});
+      var x0=null; lb.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+      lb.addEventListener('touchend',function(e){if(x0===null)return; var dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>40) show(i+(dx<0?1:-1)); x0=null});
+    })();
+    </script>
   </main>
 
   <!-- FOOTER -->
