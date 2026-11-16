@@ -39,7 +39,9 @@
     .ph-sec h2{font-size:clamp(1.5rem,3vw,2rem);margin-bottom:.4rem}
     .ph-sub{color:var(--muted-fg);margin-bottom:1.5rem}
     .ph-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem}
-    .ph-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem}
+    .ph-card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;color:inherit;text-decoration:none;transition:border-color .2s,background .2s,transform .2s}
+    .ph-card:hover,.ph-card:focus-visible{border-color:var(--primary);background:var(--card-hover);transform:translateY(-2px)}
+    .ph-book{margin-top:auto;padding-top:1rem;font-weight:600;color:var(--primary)}
     .ph-card h3{font-size:1.15rem;margin-bottom:.25rem}
     .ph-price{font-family:"Cinzel",Georgia,serif;font-size:2rem;font-weight:700;color:var(--primary);margin:.35rem 0}
     .ph-card ul{list-style:none;padding:0;margin:0;color:var(--muted-fg);line-height:1.8}
@@ -115,15 +117,15 @@
       <h2>Sessions</h2>
       <p class="ph-sub">Outdoors, relaxed, usually around sunset. Weekends only.</p>
       <div class="ph-cards">
-        <div class="ph-card"><h3>Family, couples &amp; seniors</h3><div class="ph-price">$175</div><ul><li>1 hour, 1 location</li><li>40+ edited photos</li><li>Online gallery in 2 weeks</li></ul></div>
-        <div class="ph-card"><h3>Mini session</h3><div class="ph-price">$100</div><ul><li>30 minutes</li><li>20 edited photos</li><li>Great for little kids</li></ul></div>
-        <div class="ph-card"><h3>Headshots</h3><div class="ph-price">$85</div><ul><li>30 minutes</li><li>10 edited photos</li><li>A few different looks</li></ul></div>
+        <a class="ph-card" href="contact.html?book=family#contact-form"><h3>Family, couples &amp; seniors</h3><div class="ph-price">$175</div><ul><li>1 hour, 1 location</li><li>40+ edited photos</li><li>Online gallery in 2 weeks</li></ul><span class="ph-book">Book this session &rarr;</span></a>
+        <a class="ph-card" href="contact.html?book=mini#contact-form"><h3>Mini session</h3><div class="ph-price">$100</div><ul><li>30 minutes</li><li>20 edited photos</li><li>Great for little kids</li></ul><span class="ph-book">Book this session &rarr;</span></a>
+        <a class="ph-card" href="contact.html?book=headshots#contact-form"><h3>Headshots</h3><div class="ph-price">$85</div><ul><li>30 minutes</li><li>10 edited photos</li><li>A few different looks</li></ul><span class="ph-book">Book this session &rarr;</span></a>
       </div>
       <p class="ph-note">Mini days ($75, 15 minutes) are announced on <a href="https://www.instagram.com/forrestblaisphotography" target="_blank" rel="noopener">Instagram</a>. Every session includes print rights.</p>
     </section>
 
     <section class="ph-sec container" id="work">
-      <h2>Recent work</h2>
+      <h2>Highlights</h2>
       <p class="ph-sub">Tap any photo to see it larger.</p>
       <div class="gal-grid">
           <a href="images/photography/families/ohlin-01.jpg" data-lb><img src="images/photography/families/ohlin-01-sm.jpg" width="1600" height="1067" loading="lazy" alt="Family session in the mountains"></a>

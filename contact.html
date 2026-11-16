@@ -277,6 +277,12 @@
             (good ? "background:rgba(47,184,166,.15);border:1px solid #2fb8a6;color:#d8f5f0" : "background:rgba(226,103,93,.15);border:1px solid #e2675d;color:#f6d6d3");
         }
         var q = new URLSearchParams(location.search);
+        var BOOK = { family: "Family, couples & seniors session ($175)", mini: "Mini session ($100)", headshots: "Headshots ($85)" };
+        if (BOOK[q.get("book")]) {
+          document.getElementById("contact-subject").value = "photo-portrait";
+          var m = document.getElementById("contact-message");
+          if (!m.value) m.value = "I'd like to book a " + BOOK[q.get("book")] + ".\n\nDates that work for me: \nWho's in the photos: \nLocation ideas: ";
+        }
         if (q.get("sent")) say("Thanks! Your message is on its way. I'll get back to you within 24–48 hours.", true);
         else if (q.get("error")) say(q.get("error"), false);
         form.addEventListener("submit", function (e) {
