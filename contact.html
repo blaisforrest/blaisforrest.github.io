@@ -292,7 +292,7 @@
           e.preventDefault();
           var btn = form.querySelector("button[type=submit]"), label = btn.innerHTML;
           btn.disabled = true; btn.innerHTML = "Sending…";
-          fetch(form.action, { method: "POST", headers: { "Accept": "application/json" }, body: new URLSearchParams(new FormData(form)) })
+          (function () { var fd = new FormData(form); fd.append("_t", String(Date.now() - PAGE_T)); return fetch(form.action, { method: "POST", headers: { "Accept": "application/json" }, body: new URLSearchParams(fd) }); })()
             .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
             .then(function (x) {
               if (x.ok) { form.reset(); say("Thanks! Your message is on its way. I'll get back to you within 24–48 hours.", true); }
@@ -365,6 +365,7 @@
   </footer>
 
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script>var PAGE_T = Date.now();</script>
   <script src="main.js"></script>
 </body>
 </html>
